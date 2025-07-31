@@ -8,7 +8,7 @@ export function Intro() {
             <div className="flex justify-center flex-col gap-3 items-center w-full min-h-screen bg-gradient-to-b from-[#7EA4F6] to-[#304BA2] rounded-bl-[500px] rounded-br-[500px]">
                 <h1 className="text-white text-center font-bold text-4xl">A Melhor Plataforma Para <br />Aluguel de Carros</h1>
                 <p className="font-light text-sm text-white text-center max-w-80 w-full">Abrimos a porta para você explorar o mundo com comforto e estilo, sendo seu parceiro de viagem de confiança</p>
-                <div className="mt-4 bg-white px-3 py-5 rounded-full max-w-3xl w-full flex justify-between items-center">
+                <div className="z-10 mt-4 bg-white px-3 py-5 rounded-full max-w-3xl w-full flex justify-between items-center">
                     <div className="flex w-full justify-between">
                             <div className="flex items-center gap-4 w-full">
                                 <FaLocationDot className="shrink-0" />
@@ -43,7 +43,7 @@ export function Intro() {
                         </div>
                 </div>
             </div>
-            <Image className="m-auto -mt-[270px]" src="/images/car-intro.png" width={800} height={300} alt="carro da introdução" />
+            <Image className="m-auto -mt-[280px] max-w-4xl w-full" src="/images/car-intro.png" width={800} height={300} alt="carro da introdução" />
         </>
     )
 }
