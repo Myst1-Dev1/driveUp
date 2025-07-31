@@ -43,7 +43,7 @@ export function Intro() {
                         </div>
                 </div>
             </div>
-            <Image className="m-auto -mt-[280px] max-w-4xl w-full" src="/images/car-intro.png" width={800} height={300} alt="carro da introdução" />
+            <Image className="m-auto -mt-[260px] max-w-3xl w-full" src="/images/car-intro.png" width={800} height={300} alt="carro da introdução" />
         </>
     )
 }

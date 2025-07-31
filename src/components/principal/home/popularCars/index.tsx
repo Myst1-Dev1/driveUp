@@ -4,7 +4,7 @@ import { FaGasPump, FaHeart, FaLifeRing, FaUsers } from "react-icons/fa";
 export function PopularCars() {
     return (
         <>
-            <div className="container">
+            <div className="container -mt-10">
                 <div className="flex justify-between items-center flex-col lg:flex-row gap-5 lg:gap-0">
                     <h2 className="font-bold text-xl">Nossos Carros Populares</h2>
                     <p className="font-light text-[#848484] text-xs max-w-80 w-full">Aproveite ofertas exclusivas e os melhores preços para pacotes de viagem incríveis. Oferecemos o melhor custo-benefício para cada aventura.</p>
@@ -18,7 +18,7 @@ export function PopularCars() {
                             </div>
                             <FaHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
-                        <Image className="w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
+                        <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">
                             <div className="text-[#848484] flex items-center gap-2">
                                 <FaGasPump /> <span className="text-sm">90L</span>
@@ -43,7 +43,7 @@ export function PopularCars() {
                             </div>
                             <FaHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
-                        <Image className="w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
+                        <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">
                             <div className="text-[#848484] flex items-center gap-2">
                                 <FaGasPump /> <span className="text-sm">90L</span>
@@ -68,7 +68,7 @@ export function PopularCars() {
                             </div>
                             <FaHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
-                        <Image className="w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
+                        <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">
                             <div className="text-[#848484] flex items-center gap-2">
                                 <FaGasPump /> <span className="text-sm">90L</span>
