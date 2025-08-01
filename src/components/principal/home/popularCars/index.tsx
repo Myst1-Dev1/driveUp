@@ -4,7 +4,7 @@ import { FaGasPump, FaHeart, FaLifeRing, FaUsers } from "react-icons/fa";
 export function PopularCars() {
     return (
         <>
-            <div className="container -mt-10">
+            <div className="container mt-20 lg:-mt-10">
                 <div className="flex justify-between items-center flex-col lg:flex-row gap-5 lg:gap-0">
                     <h2 className="font-bold text-xl">Nossos Carros Populares</h2>
                     <p className="font-light text-[#848484] text-xs max-w-80 w-full">Aproveite ofertas exclusivas e os melhores preços para pacotes de viagem incríveis. Oferecemos o melhor custo-benefício para cada aventura.</p>

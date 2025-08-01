@@ -7,7 +7,7 @@ export function Footer() {
     return (
         <>
             <footer className="bg-[#15191F] w-full mt-20">
-                <div className="container py-8 grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-0 place-items-center">
+                <div className="container py-8 flex justify-center lg:justify-between items-center gap-8 lg:gap-0 flex-col lg:flex-row">
                     <div className="flex flex-col max-w-80 w-full">
                         <Image className="w-full max-w-32 h-16 object-cover m-auto" src="/images/logo-white.png" width={200} height={100} alt="versão branca da logo" />
                         <p className="text-[#fafafb] font-normal text-sm text-center">Somos uma locadora de veículos comprometida com sua mobilidade. Alugue de forma rápida, prática e com total confiança.</p>
@@ -23,7 +23,7 @@ export function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-3 max-w-80 w-full">
+                    <div className="flex flex-col gap-3 max-w-80 w-full lg:text-left items-center lg:items-start">
                         <Link href="" className="text-[#DBEAFE] text-sm transition-all duration-500 hover:text-blue-400">Politica de privacidade</Link>
                         <Link href="" className="text-[#DBEAFE] text-sm transition-all duration-500 hover:text-blue-400">Política de Devolução</Link>
                         <Link href="" className="text-[#DBEAFE] text-sm transition-all duration-500 hover:text-blue-400">Termos e Condições de Uso</Link>
@@ -48,7 +48,7 @@ export function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className="container w-full py-6 flex justify-center lg:justify-between flex-col lg:flex-row">
+                <div className="container w-full py-6 flex justify-center gap-4 lg:gap-0 lg:justify-between flex-col lg:flex-row">
                     <p className="text-[#DFE5F6] font-semibold">@2025 DriveUp, todos os direitos reservados</p>
                     <div className="text-white flex gap-4 flex-col lg:flex-row">
                         <Link href="" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Home</Link>
