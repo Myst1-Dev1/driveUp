@@ -16,7 +16,7 @@ export default function WoWeAre() {
                             <span className="text-4xl font-bold flex gap-2 items-center">600+ <span className="text-gray-500 text-sm font-normal">Clientes <br /> Satisfeitos</span></span>
                         </div>
                     </div>
-                    <Image className="max-w-96 h-60 w-full rounded-lg object-cover" src="/images/woWeAreImg.webp" width={500} height={300} alt="foto da chave de um carro sendo entregue" />
+                    <Image className="max-w-96 h-60 w-full rounded-lg object-cover" src="/images/woWeAreImg.webp" width={500} height={500} alt="foto da chave de um carro sendo entregue" />
                 </div>
                 <div className="mt-16 grid grid-cols-1 place-items-center gap-8 lg:gap-0 lg:grid-cols-3">
                     <div className="flex justify-center items-center flex-col gap-3 max-w-80 w-full">

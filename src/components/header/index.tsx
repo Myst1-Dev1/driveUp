@@ -20,8 +20,8 @@ export function Header() {
                     <nav className="flex justify-center items-center flex-col lg:flex-row gap-4 w-full">
                         <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="/">Home</Link>
                         <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="/woWeAre">Quem somos</Link>
-                        <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="">Serviços</Link>
-                        <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="">Contato</Link>
+                        <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="/services">Serviços</Link>
+                        <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="/contact">Contato</Link>
                     </nav>
                     <button onClick={() => { setIsModalOpen(true); setFormType("signIn") }} className="bg-zinc-800 text-white rounded-xl max-w-20 w-full p-2 cursor-pointer transition-all duration-500 hover:bg-blue-600">Login</button>
                     <div onClick={() => setIsMobileMenuOpen(false)}  className="w-6 h-6 rounded-full bg-zinc-600 text-white lg:hidden absolute top-5 right-6 cursor-pointer transition-all duration-500 grid place-items-center hover:bg-blue-700">
