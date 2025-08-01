@@ -41,7 +41,7 @@ export default function Services() {
                 <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 place-items-center m-auto">
                     <div className="max-w-80 w-full flex flex-col gap-5">
                         <h2 className="text-xl font-bold">Conheça os Beneficios em Alugar Com Nossa Empresa</h2>
-                        <ol className="list-decimal list-inside text-base text-gray-900 font-normal pl-4 space-y-2">
+                        <ol className="list-decimal list-inside text-base text-gray-900 font-normal pl-5 space-y-2">
                             <li>Frota diversificada com modelos de carros para todos os gostos e necessidades</li>
                             <li>Atendimento 24 horas e suporte ao cliente sempre que disponível</li>
                             <li>Processos de aluguel rápidos e sem burocracia, com locação facil e transparente</li>
