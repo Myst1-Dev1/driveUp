@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaGasPump, FaLifeRing, FaRegHeart, FaUsers } from "react-icons/fa";
 
 export function Cars() {
@@ -7,7 +8,7 @@ export function Cars() {
             <div className="container py-8 mt-20">
                 <h2 className="text-center text-xl font-bold">Os Melhores Carros para Alugar</h2>
                 <div className="mt-16 grid place-items-center m-auto grid-cols-1 lg:grid-cols-4 gap-5 lg:gap-0">
-                    <div className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                    <Link href="/car/1" className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -31,8 +32,8 @@ export function Cars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
-                    <div className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                    </Link>
+                    <Link href="/car/1" className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -56,8 +57,8 @@ export function Cars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
-                    <div className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                    </Link>
+                    <Link href="/car/1" className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -81,8 +82,8 @@ export function Cars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
-                    <div className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                    </Link>
+                    <Link href="/car/1" className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -106,7 +107,7 @@ export function Cars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <button className="mt-8 block mx-auto cursor-pointer max-w-40 bg-black text-white rounded-2xl font-semibold p-3 transition-all duration-500 hover:bg-blue-600">Ver mais</button>
             </div>

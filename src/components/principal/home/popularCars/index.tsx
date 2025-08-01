@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaGasPump, FaHeart, FaLifeRing, FaUsers } from "react-icons/fa";
 
 export function PopularCars() {
@@ -10,7 +11,7 @@ export function PopularCars() {
                     <p className="font-light text-[#848484] text-xs max-w-80 w-full">Aproveite ofertas exclusivas e os melhores preços para pacotes de viagem incríveis. Oferecemos o melhor custo-benefício para cada aventura.</p>
                 </div>
                 <div className="mt-12 m-auto place-items-center grid grid-cols-1 gap-5 lg:gap-0 lg:grid-cols-3">
-                    <div className="max-w-96 w-full p-3 rounded-lg bg-[#DFE5F6] flex flex-col gap-3">
+                    <Link href="/car/1" className="max-w-96 w-full p-3 rounded-lg bg-[#DFE5F6] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -34,8 +35,8 @@ export function PopularCars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
-                    <div className="max-w-96 w-full p-3 rounded-lg bg-[#DFE5F6] flex flex-col gap-3">
+                    </Link>
+                    <Link href="/car/1" className="max-w-96 w-full p-3 rounded-lg bg-[#DFE5F6] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -59,8 +60,8 @@ export function PopularCars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
-                    <div className="max-w-96 w-full p-3 rounded-lg bg-[#DFE5F6] flex flex-col gap-3">
+                    </Link>
+                    <Link href="/car/1" className="max-w-96 w-full p-3 rounded-lg bg-[#DFE5F6] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">Koenigsegg</h3>
@@ -84,7 +85,7 @@ export function PopularCars() {
                             <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
                             <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </>
