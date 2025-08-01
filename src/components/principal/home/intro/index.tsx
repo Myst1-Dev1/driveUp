@@ -14,7 +14,7 @@ export function Intro() {
                                 <FaLocationDot className="shrink-0" />
                                 <div className="flex flex-col gap-3 w-full">
                                     <label htmlFor="location" className="font-bold">Localização</label>
-                                    <input className="outline-none lg:max-w-40 w-full" id="location" type="text" placeholder="Cidade ou destino" />
+                                    <input className="outline-none lg:max-w-40 w-full border-b border-gray-300" id="location" type="text" placeholder="Cidade ou destino" />
                                 </div>
                             </div>
                             <div className="flex items-center gap-4 w-full">
@@ -22,8 +22,8 @@ export function Intro() {
                                 <div className="flex flex-col gap-3 w-full">
                                     <label htmlFor="pickup" className="font-bold">Data de retirada</label>
                                     <div className="flex gap-4">
-                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full" id="pickup" type="text" placeholder="Data" />
-                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full" id="pickup" type="text" placeholder="Hora" />
+                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full border-b border-gray-300" id="pickup" type="text" placeholder="Data" />
+                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full border-b border-gray-300" id="pickup" type="text" placeholder="Hora" />
                                     </div>
                                 </div>
                             </div>
@@ -32,8 +32,8 @@ export function Intro() {
                                 <div className="flex flex-col gap-3 w-full">
                                     <label htmlFor="dropoff" className="font-bold">Data de devolução</label>
                                     <div className="flex gap-4">
-                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full" id="pickup" type="text" placeholder="Data" />
-                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full" id="pickup" type="text" placeholder="Hora" />
+                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full border-b border-gray-300" id="pickup" type="text" placeholder="Data" />
+                                        <input className="outline-none max-w-1/2 lg:max-w-16 w-full border-b border-gray-300" id="pickup" type="text" placeholder="Hora" />
                                     </div>
                                 </div>
                             </div>

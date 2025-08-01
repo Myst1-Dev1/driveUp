@@ -13,4 +13,8 @@ body {
   .container {
     @apply max-w-6xl m-auto px-4 lg:px-0
   }
+
+  .input {
+    @apply rounded-md p-3 w-full border border-gray-300 outline-none
+  }
 }
