@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Contact() {
     return (
         <>
-            <div className="container pt-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 place-items-center">
+            <div className="container py-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 place-items-center">
                 <Image className="max-w-md w-full object-cover rounded-lg" src="/images/contact-img.webp" width={500} height={500} alt="foto da página de contato" />
                 <div>
                     <h2 className="text-xl text-center mb-2 font-bold">Entre em Contato e Alugue um Carro</h2>
