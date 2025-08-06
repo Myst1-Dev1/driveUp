@@ -2,6 +2,9 @@
 
 import { UserCards } from "@/components/principal/profile/userCards";
 import { UserData } from "@/components/principal/profile/userData";
+import { UserFavorites } from "@/components/principal/profile/userFavorites";
+import { UserReserves } from "@/components/principal/profile/userReserves";
+import { UserTransactions } from "@/components/principal/profile/userTransactions";
 import Image from "next/image";
 import { useState } from "react";
 import { FaDollyFlatbed, FaEnvelopeOpen, FaStar, FaUserCog } from "react-icons/fa";
@@ -42,6 +45,9 @@ export default function Profile() {
                 <div className="col-span-2">
                     {activeMenu === 'data' && <UserData />}
                     {activeMenu === 'card' && <UserCards />}
+                    {activeMenu === 'transaction' && <UserTransactions />}
+                    {activeMenu === 'reserve' && <UserReserves />}
+                    {activeMenu === 'favorite' && <UserFavorites />}
                 </div>
             </div>
         </>

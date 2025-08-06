@@ -9,6 +9,10 @@ body {
   background-color: #FAFAFB;
 }
 
+.scrollDontShow::-webkit-scrollbar {
+  display: none;
+}
+
 @layer components {
   .container {
     @apply max-w-6xl m-auto px-4 lg:px-0

@@ -41,7 +41,7 @@ export function Header() {
                 <div className="flex items-center gap-4">
                     {token
                     ?
-                        <div onClick={() => setIsUserBoxOpen(true)} className="cursor-pointer w-12 h-12 aspect-square bg-black text-white rounded-full grid place-items-center">
+                        <div onClick={() => setIsUserBoxOpen(!isUserBoxOpen)} className="cursor-pointer w-12 h-12 aspect-square bg-black text-white rounded-full grid place-items-center">
                             <FaUserAlt />
                         </div>
                     : <button onClick={() => { setIsModalOpen(true); setFormType("signIn") }} className="bg-zinc-800 text-white rounded-xl max-w-20 w-full p-2 cursor-pointer transition-all duration-500 hover:bg-blue-600">Login</button>
