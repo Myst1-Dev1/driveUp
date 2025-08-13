@@ -1,4 +1,5 @@
 import { AdminHeader } from "@/components/admin/adminHeader";
+import { SalesGraph } from "@/components/admin/salesGraph";
 import { SideBar } from "@/components/admin/sideBar";
 import { FaCarSide, FaSignal } from "react-icons/fa";
 import { FaDollarSign, FaUser } from "react-icons/fa6";
@@ -11,7 +12,7 @@ export default function Panel() {
                 <div className="flex-1">
                     <AdminHeader />
 
-                    <div className="py-8 px-5">
+                    <div className="py-8 px-8">
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-0">
                             <div className="bg-white p-3 max-w-60 w-full rounded-md flex items-center gap-5 transition-all duration-500 hover:bg-blue-500 hover:text-white">
                                 <FaCarSide className="text-blue-700 text-4xl shrink-0" />
@@ -43,7 +44,7 @@ export default function Panel() {
                             </div>
                         </div>
                         {/* Aqui abaixo o gráfico de vendas */}
-                        
+                        <SalesGraph />
                     </div>
                 </div>
             </div>
