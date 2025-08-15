@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Drive Up",
@@ -13,6 +14,7 @@ export default function RootLayout({
   return (
     <>
         {children}
+        <p className="text-center clear-both font-semibold py-8">Desenvolvido com ❤️ por <Link href="https://www.mystdev.com.br/" target="_blank" rel="noopener noreferrer" className="text-blue-100">Myst1 Dev</Link></p>
     </>
   );
 }

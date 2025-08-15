@@ -1,9 +1,15 @@
+'use client';
+
 import { AdminHeader } from "@/components/admin/adminHeader";
+import { CarModal } from "@/components/admin/carModal";
 import { SideBar } from "@/components/admin/sideBar";
 import Image from "next/image";
+import { useState } from "react";
 import { FaGasPump, FaLifeRing, FaPencilAlt, FaSearch, FaTrashAlt, FaUsers } from "react-icons/fa";
 
 export default function CarsAdmin() {
+    const [isCarModalOpen, setIsCarModalOpen] = useState(false);
+    
     return (
         <>
             <div className="flex">
@@ -12,12 +18,12 @@ export default function CarsAdmin() {
                     <AdminHeader />
                     <div className="py-8 px-8">
                         <h2 className="font-bold text-xl">Carros</h2>
-                        <div className="mt-8 flex justify-between items-center">
-                            <div className="max-w-52 w-full rounded-lg border border-gray-300 flex items-center justify-between">
+                        <div className="mt-8 flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-end lg:items-center">
+                            <div className="lg:max-w-52 w-full rounded-lg border border-gray-300 flex items-center justify-between">
                                 <input type="text" className="outline-none p-3 w-full" placeholder="Buscar Carro" />
                                 <FaSearch className="mr-2 text-gray-700" />
                             </div>
-                            <button className="bg-blue-500 text-white p-3 rounded-lg max-w-48 w-full font-semibold cursor-pointer transition-all duration-500 hover:brightness-90">Adicionar Carro +</button>
+                            <button onClick={() => setIsCarModalOpen(true)} className="bg-blue-500 text-white p-3 rounded-lg max-w-48 w-full font-semibold cursor-pointer transition-all duration-500 hover:brightness-90">Adicionar Carro +</button>
                         </div>
                         <div className="py-8 grid grid-cols-1 lg:grid-cols-3 gap-8 place-items-center">
                             <div className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
@@ -130,6 +136,7 @@ export default function CarsAdmin() {
                     </div>
                 </div>
             </div>
+            <CarModal isOpenModal={isCarModalOpen} setIsOpenModal={setIsCarModalOpen} />
         </>
     )
 }
