@@ -13,7 +13,7 @@ export default function Panel() {
                     <AdminHeader />
 
                     <div className="py-8 px-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-0">
+                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-0 place-items-center">
                             <div className="bg-white p-3 max-w-60 w-full rounded-md flex items-center gap-5 transition-all duration-500 hover:bg-blue-500 hover:text-white">
                                 <FaCarSide className="text-blue-700 text-4xl shrink-0" />
                                 <div className="font-semibold m-auto flex justify-end items-end text-end flex-col gap-5">

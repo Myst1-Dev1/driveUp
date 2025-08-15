@@ -40,3 +40,36 @@ export async function signInAction(_: SignInResult, formData: FormData): Promise
     return { success: false, message };
   }
 }
+
+export async function signUpAction(_: SignInResult, formData: FormData): Promise<SignInResult> {
+  const email = formData.get("email")?.toString();
+  const phone = formData.get("phone")?.toString();
+  const address = formData.get("address")?.toString();
+  const cpfCnpj = formData.get("cpfCnpj")?.toString();
+  const passwordHash = formData.get("passwordHash")?.toString();
+  const confirmPassword = formData.get("confirmPassword")?.toString();
+  const birthDate = formData.get("birthDate")?.toString();
+
+  if (!email || !phone || !address || !cpfCnpj || !passwordHash || !confirmPassword || !birthDate) {
+    return { success: false, message: "Campos obrigatórios." };
+  }
+
+  if(passwordHash !== confirmPassword) {
+    return { success: false, message: "As senhas não coincidem!" }
+  }
+
+  try {
+    await api.post("/auth/register", { email, phone, address, cpfCnpj, passwordHash, birthDate });
+
+    return { success: true };
+    
+  } catch (error:any) {
+    const message =
+      error?.response?.data?.message ||
+      error?.message ||
+      "Erro inesperado ao fazer login";
+
+    console.error("Erro ao fazer login:", message);
+    return { success: false, message };
+  }
+}

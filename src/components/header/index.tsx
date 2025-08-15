@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useActionState } from "react";
+import { useState } from "react";
 import { FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import { Modal } from "../modal";
-import { signInAction } from "@/actions/signActions";
 import { parseCookies } from "nookies";
 import { UserBox } from "./userBox";
+import { SignIn } from "./signIn";
+import { SignUp } from "./signUp";
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -16,11 +17,7 @@ export function Header() {
     const [formType, setFormType] = useState("signIn");
     const [isUserBoxOpen, setIsUserBoxOpen] = useState(false);
 
-    const [formState, formAction] = useActionState(signInAction, { success: false });
-
     const { "user-token": token } = parseCookies();
-
-    console.log(token);
 
     return (
         <>
@@ -53,34 +50,9 @@ export function Header() {
                 <div className="py-4">
                     <Image className="w-40 h-10 object-cover block mx-auto" src="/images/logo-dark.png" width={200} height={200} alt="logo" />
                     {formType === "signIn" ?
-                    <div>
-                        <h2 className="font-semibold text-center text-xl mt-5">Bem vindo</h2>
-                        <form action={formAction} className="mt-5">
-                            <input className="mb-5 input" name="email" type="email" placeholder="Email" />
-                            <input className="input" name="password" type="password" placeholder="Senha" />
-                            <span className="font-light text-center block text-sm mt-3">Não possui uma conta? <span onClick={() => setFormType("signUp")} className="text-blue-400 font-medium cursor-pointer transition-all duration-500 hover:text-blue-600">Cadastro</span></span>
-                            {formState.message && (
-                                <p className="text-red-500 text-sm text-center mt-2">{formState.message}</p>
-                            )}
-                            <button className="font-semibold p-3 w-full rounded-lg bg-black text-white cursor-pointer transition-all duration-500 mt-5 text-xl hover:bg-blue-400">Entrar</button>
-                        </form>
-                    </div>
+                    <SignIn setFormType = {setFormType} />
                     :
-                    <div>
-                        <h2 className="font-semibold text-center text-xl mt-5">Criar conta</h2>
-                        <form action="" className="mt-5">
-                            <div className="flex flex-col lg:flex-row gap-4 mb-0 lg:mb-5">
-                                <input className="input" type="text" placeholder="Nome" />
-                                <input className="input mb-4 lg:mb-0" type="email" placeholder="Email" />
-                            </div>
-                            <div className="flex flex-col lg:flex-row gap-4">
-                                <input className="input" type="password" placeholder="Senha" />
-                                <input className="input" type="password" placeholder="Confirme a senha" />
-                            </div>
-                            <span className="font-light text-center block text-sm mt-3">Já possui uma conta? <span onClick={() => setFormType("signIn")} className="text-blue-400 font-medium cursor-pointer transition-all duration-500 hover:text-blue-600">Entrar</span></span>
-                            <button className="font-semibold p-3 w-full rounded-lg bg-black text-white cursor-pointer transition-all duration-500 mt-5 text-xl hover:bg-blue-400">Cadastrar</button>
-                        </form>
-                    </div>
+                    <SignUp setFormType = {setFormType}/>
                     }
                 </div>
             </Modal>
