@@ -13,6 +13,10 @@ body {
   display: none;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 @layer components {
   .container {
     @apply max-w-6xl m-auto px-4 lg:px-0
