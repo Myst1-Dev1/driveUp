@@ -14,7 +14,7 @@ export type CarType = {
     price_per_day: number;
     price_per_week: number;
     reviews: [];
-    thumbnail_urls: String[];
+    thumbnail_urls: string[];
     transmission: string;
     year: number;
 }

@@ -25,7 +25,7 @@ export function Cars({ carData }:CarsProps) {
                             </div>
                             <FaRegHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
-                        <Image className="max-w-80 m-auto w-full object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
+                        <Image className="max-w-80 m-auto w-full h-32 object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">
                             <div className="text-[#848484] flex items-center gap-2">
                                 <FaGasPump /> <span className="text-xs">{car.fuel_capacity}L</span>

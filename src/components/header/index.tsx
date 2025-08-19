@@ -36,6 +36,8 @@ export function Header() {
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
+                                        <FaBars onClick={() => setIsMobileMenuOpen(true)} className="block lg:hidden cursor-pointer transition-all duration-500 hover:text-blue-600" />
+                    
                     {token
                     ?
                         <div onClick={() => setIsUserBoxOpen(!isUserBoxOpen)} className="cursor-pointer w-12 h-12 aspect-square bg-black text-white rounded-full grid place-items-center">
@@ -43,7 +45,6 @@ export function Header() {
                         </div>
                     : <button onClick={() => { setIsModalOpen(true); setFormType("signIn") }} className="bg-zinc-800 text-white rounded-xl max-w-24 w-full p-3 cursor-pointer transition-all duration-500 hover:bg-blue-600">Login</button>
                     }
-                    <FaBars onClick={() => setIsMobileMenuOpen(true)} className="block lg:hidden cursor-pointer transition-all duration-500 hover:text-blue-600" />
                 </div>
             </header>
             <Modal maxWidth="max-w-md" isOpenModal={isModalOpen} setIsOpenModal={setIsModalOpen}>
