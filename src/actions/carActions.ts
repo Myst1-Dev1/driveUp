@@ -68,3 +68,56 @@ export async function createCarAction(
     return { success: false, message: error?.message ?? "Erro ao criar carro." };
   }
 }
+
+export async function createCarReview(
+  _prev: UpdateResult,
+  formData: FormData,
+  id:number
+): Promise<UpdateResult> {
+
+    const cookieStore = await cookies();
+    const token = cookieStore.get("user-token")?.value;
+
+    if (!token) {
+      return { success: false, message: "Token de autenticação não encontrado." };
+    }
+
+    const evaluatorName = formData.get("evaluatorName")?.toString() ?? "";
+    const evaluatorUrl = formData.get("evaluatorUrl")?.toString() ?? "";
+    const comment = formData.get("comment")?.toString() ?? "";
+
+    console.log(evaluatorUrl, evaluatorName, comment);
+
+    try {
+      
+      await api.post("/car/createCarReview/" + id, { evaluatorUrl, evaluatorName , comment }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+      
+      return { success: true, message: "Avaliação criada com sucesso" };
+    } catch (error:any) {
+      return { success: false, message: error?.message ?? "Erro ao criar avaliação." };
+    }
+}
+
+export async function favoriteACar(carId: number, userProfileId: number) {
+
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("user-token")?.value;
+
+    if (!token) {
+      return { success: false, message: "Token de autenticação não encontrado." };
+    }
+
+    await api.post("/car/favorite", { carId, userProfileId }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  } catch (error) {
+    console.log('Tivemos um erro ao favoritar o carro', error)
+  }
+}

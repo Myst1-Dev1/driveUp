@@ -36,7 +36,7 @@ export function Header() {
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                                        <FaBars onClick={() => setIsMobileMenuOpen(true)} className="block lg:hidden cursor-pointer transition-all duration-500 hover:text-blue-600" />
+                    <FaBars onClick={() => setIsMobileMenuOpen(true)} className="block lg:hidden cursor-pointer transition-all duration-500 hover:text-blue-600" />
                     
                     {token
                     ?
@@ -51,7 +51,7 @@ export function Header() {
                 <div className="py-4">
                     <Image className="w-40 h-10 object-cover block mx-auto" src="/images/logo-dark.png" width={200} height={200} alt="logo" />
                     {formType === "signIn" ?
-                    <SignIn setFormType = {setFormType} />
+                    <SignIn setFormType = {setFormType} setIsModalOpen = {setIsModalOpen} />
                     :
                     <SignUp setFormType = {setFormType}/>
                     }

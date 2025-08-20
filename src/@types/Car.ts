@@ -13,8 +13,14 @@ export type CarType = {
     price_per_hour: number;
     price_per_day: number;
     price_per_week: number;
-    reviews: [];
+    reviews: Review[];
     thumbnail_urls: string[];
     transmission: string;
     year: number;
+}
+
+type Review = {
+    name: string;
+    avatarUrl: string;
+    comment: string;
 }

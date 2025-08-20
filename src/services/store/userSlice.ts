@@ -5,7 +5,8 @@ import Cookies from 'js-cookie';
 export interface User {
   data: [
     {
-      id: string;
+      id: number;
+      userId: number;
       fullName: string;
       email: string;
       phone?: string;
@@ -18,7 +19,7 @@ export interface User {
 }
 
 interface UserState {
-  data: User | null;
+  data: User | any;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 }

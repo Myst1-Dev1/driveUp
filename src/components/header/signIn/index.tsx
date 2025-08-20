@@ -1,12 +1,19 @@
 import { signInAction } from "@/actions/signActions";
-import React, { useActionState } from "react";
+import React, { useActionState, useEffect } from "react";
 
 interface SignInProps {
     setFormType:React.Dispatch<React.SetStateAction<string>>;
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function SignIn({ setFormType }:SignInProps) {
+export function SignIn({ setFormType, setIsModalOpen }:SignInProps) {
     const [formState, formAction, pending] = useActionState(signInAction, { success: false });
+
+    useEffect(() => {
+        if (formState.success) {
+            setIsModalOpen(false);
+        }
+    }, [formState.success, setIsModalOpen]);
 
     return (
         <>
