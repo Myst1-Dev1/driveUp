@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaGasPump, FaHeart, FaLifeRing, FaUsers } from "react-icons/fa";
+import { FaGasPump, FaRegHeart, FaLifeRing, FaUsers } from "react-icons/fa";
 
 export function PopularCars() {
     return (
@@ -17,7 +17,7 @@ export function PopularCars() {
                                 <h3 className="font-bold">Koenigsegg</h3>
                                 <h4 className="text-[#848484] font-light text-sm">Sport</h4>
                             </div>
-                            <FaHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
+                            <FaRegHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
                         <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">
@@ -42,7 +42,7 @@ export function PopularCars() {
                                 <h3 className="font-bold">Koenigsegg</h3>
                                 <h4 className="text-[#848484] font-light text-sm">Sport</h4>
                             </div>
-                            <FaHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
+                            <FaRegHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
                         <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">
@@ -67,7 +67,7 @@ export function PopularCars() {
                                 <h3 className="font-bold">Koenigsegg</h3>
                                 <h4 className="text-[#848484] font-light text-sm">Sport</h4>
                             </div>
-                            <FaHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
+                            <FaRegHeart className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600" />
                         </div>
                         <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
                         <div className="w-full flex justify-between">

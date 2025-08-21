@@ -121,3 +121,22 @@ export async function favoriteACar(carId: number, userProfileId: number) {
     console.log('Tivemos um erro ao favoritar o carro', error)
   }
 }
+
+export async function deleteFavorite(carId: number, userProfileId: number) {
+
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("user-token")?.value;
+
+    if (!token) {
+      return { success: false, message: "Token de autenticação não encontrado." };
+    }
+
+    await api.delete("car/deleteFavorite", {
+      data: { carId, userProfileId },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (error) {
+    console.log('Tivemos um erro ao remover o favorito', error)
+  }
+}

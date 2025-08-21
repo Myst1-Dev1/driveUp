@@ -26,7 +26,7 @@ export async function signInAction(_: SignInResult, formData: FormData): Promise
       name: "user-token",
       value: token,
       path: "/",
-      maxAge: 60 * 60 * 24 * 7 // 7 dias
+      maxAge: 60 * 60 * 24 * 1 // 1 dia
     });
 
     return { success: true };
