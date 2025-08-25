@@ -15,7 +15,7 @@ export function Cars({ carData }:CarsProps) {
     const { data: user} = useAppSelector(s => s.user);
     const { data: favorite} = useAppSelector(s => s.favorite);
 
-    console.log(carData);
+    if (!favorite) return "";
 
     return (
         <>

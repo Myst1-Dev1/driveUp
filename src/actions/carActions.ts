@@ -3,6 +3,7 @@
 import { api } from "@/services/axios";
 import { cookies } from "next/headers";
 import { UpdateResult } from "./profileActions";
+import { revalidatePath } from "next/cache";
 
 export async function createCarAction(
   _prev: UpdateResult,
@@ -120,6 +121,8 @@ export async function favoriteACar(carId: number, userProfileId: number) {
   } catch (error) {
     console.log('Tivemos um erro ao favoritar o carro', error)
   }
+
+  revalidatePath("/");
 }
 
 export async function deleteFavorite(carId: number, userProfileId: number) {
@@ -139,4 +142,6 @@ export async function deleteFavorite(carId: number, userProfileId: number) {
   } catch (error) {
     console.log('Tivemos um erro ao remover o favorito', error)
   }
+
+  revalidatePath("/");
 }
