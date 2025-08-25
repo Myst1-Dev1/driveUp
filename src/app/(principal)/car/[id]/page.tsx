@@ -1,6 +1,7 @@
 'use server';
 
 import { CarType } from "@/@types/Car";
+import { Gallery } from "@/components/gallery";
 import { ReviewForm } from "@/components/principal/reviewForm";
 import { getCarById } from "@/services/getCarById";
 import Image from "next/image";
@@ -17,12 +18,15 @@ export default async function Car({ params }: any) {
         <>
             <div className="container py-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0">
                 <div className="max-w-xl w-full">
-                    <Image className="w-full h-96 object-cover" src={data?.image_url || "/images/car-img.jpg"} width={500} height={500} alt="foto do carro" />
-                    <div className="mt-7 max-w-xl w-full overflow-x-auto overflow-x-contain snap-x snap-mandatory flex justify-between gap-4 lg:gap-0">
-                        {data?.thumbnail_urls.map((img, index) => (
-                            <Image key={index} className="max-w-32 h-24 w-full object-cover" src={img || "/images/car-img.jpg"} width={500} height={500} alt="foto de outra perspectiva do carro" />
-                        ))}
-                    </div>
+                    <Gallery
+                        baseImage={data?.image_url || "/images/car-img.jpg"}
+                        otherImages={data?.thumbnail_urls?.length ? data.thumbnail_urls : [
+                        "/images/car-img.jpg",
+                        "/images/car-img.jpg",
+                        "/images/car-img.jpg",
+                        ]}
+                        className="max-w-xl w-full"
+                    />
                 </div>
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-3">
