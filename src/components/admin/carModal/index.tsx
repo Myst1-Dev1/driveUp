@@ -68,8 +68,7 @@ export function CarModal({ isOpenModal, setIsOpenModal }:CarModalProps) {
                         <input type="text" className="input" name="car_model" placeholder="Modelo do carro" />
                         <input type="text" className="input" name="year" placeholder="Ano do carro" />
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
-                        <input type="text" className="input" name="color" placeholder="Cor do carro" />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
                         <input type="text" className="input" name="passengers" placeholder="Número de passageiros" />
                         <input type="text" className="input" name="transmission" placeholder="Transmissão" />
                     </div>

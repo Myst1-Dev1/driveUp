@@ -12,7 +12,7 @@ export default async function Car({ params }: any) {
 
     const carData = await getCarById(id);
 
-    const data:CarType = carData.data[0];
+    const data:CarType = carData?.data[0];
 
     return (
         <>
@@ -30,16 +30,16 @@ export default async function Car({ params }: any) {
                 </div>
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-3">
-                        <h2 className="text-xl font-bold">{data.name}</h2>
-                        <span className="font-light text-xs text-gray-500">{data.car_model}</span>
-                        <p className="font-medium text-sm">{data.description}</p>
+                        <h2 className="text-xl font-bold">{data?.name}</h2>
+                        <span className="font-light text-xs text-gray-500">{data?.car_model}</span>
+                        <p className="font-medium text-sm indent-5 leading-relaxed text-justify">{data?.description}</p>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <h6 className="font-normal text-gray-900 text-sm mb-2">Ano do Carro: {data.year}</h6>
-                        <h6 className="font-normal text-gray-900 text-sm mb-2">Número de passageiros: {data.passengers}</h6>
-                        <h6 className="font-normal text-gray-900 text-sm mb-2">Combustível: {data.fuel}</h6>
-                        <h6 className="font-normal text-gray-900 text-sm mb-2">Capacidade do Combustível: {data.fuel_capacity}L</h6>
-                        <h6 className="font-normal text-gray-900 text-sm mb-2">Transmissão: {data.transmission}</h6>
+                        <h6 className="font-normal text-gray-900 text-sm mb-2">Ano do Carro: {data?.year}</h6>
+                        <h6 className="font-normal text-gray-900 text-sm mb-2">Número de passageiros: {data?.passengers}</h6>
+                        <h6 className="font-normal text-gray-900 text-sm mb-2">Combustível: {data?.fuel}</h6>
+                        <h6 className="font-normal text-gray-900 text-sm mb-2">Capacidade do Combustível: {data?.fuel_capacity}L</h6>
+                        <h6 className="font-normal text-gray-900 text-sm mb-2">Transmissão: {data?.transmission}</h6>
                     </div>
                     <div>
                         <h5 className="font-bold">Preço do aluguel</h5>
@@ -52,15 +52,15 @@ export default async function Car({ params }: any) {
                             <div className="flex flex-col gap-2 pl-4">
                                 <h6 className="text-sm text-gray-600 group-hover:text-white">{Intl.NumberFormat('pt-br', {
                                     style: 'currency', currency: 'BRL'
-                                    }).format(data.price_per_hour)}
+                                    }).format(data?.price_per_hour)}
                                 </h6>
                                 <h6 className="text-sm text-gray-600 group-hover:text-white">{Intl.NumberFormat('pt-br', {
                                     style: 'currency', currency: 'BRL'
-                                    }).format(data.price_per_day)}
+                                    }).format(data?.price_per_day)}
                                 </h6>
                                 <h6 className="text-sm text-gray-600 group-hover:text-white">{Intl.NumberFormat('pt-br', {
                                     style: 'currency', currency: 'BRL'
-                                    }).format(data.price_per_week)}
+                                    }).format(data?.price_per_week)}
                                 </h6>
                             </div>
                         </div>
@@ -70,9 +70,9 @@ export default async function Car({ params }: any) {
             
             <div className="container mt-20">
                 <h2 className="font-bold text-xl text-center">Avaliações de clientes</h2>
-                {data.reviews.length === 0 ? <p className="text-center text-xl font-semibold py-12 text-red-500">O carro não possui avaliações</p> :
+                {data?.reviews.length === 0 ? <p className="text-center text-xl font-semibold py-12 text-red-500">O carro não possui avaliações</p> :
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 place-items-center mt-10">
-                        {data.reviews.map((review, index:number) => (
+                        {data?.reviews.map((review, index:number) => (
                             <div key={index} className="bg-[#F3F5F7] p-3 rounded-xl max-w-md w-full flex flex-col gap-4">
                                 <FaQuoteLeft className="text-blue-500 text-xl" />
                                 <p className="font-medium text-sm">{review.comment}</p>
@@ -86,7 +86,7 @@ export default async function Car({ params }: any) {
                 }
             </div>
 
-            <button className={`${data.availability ? 'opacity-50 cursor-none' : 'cursor-pointer'} bg-black text-white block mx-auto p-3 max-w-40 w-full font-semibold mt-12 rounded-lg transition-all duration-500 hover:bg-blue-500`}>{data.availability ? 'Já reservado' : 'Reserve Agora'}</button>
+            <button className={`${data?.availability ? 'opacity-50 cursor-none' : 'cursor-pointer'} bg-black text-white block mx-auto p-3 max-w-40 w-full font-semibold mt-12 rounded-lg transition-all duration-500 hover:bg-blue-500`}>{data?.availability ? 'Já reservado' : 'Reserve Agora'}</button>
 
             <ReviewForm id={data?.id} />
         </>

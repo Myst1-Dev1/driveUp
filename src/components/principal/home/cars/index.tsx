@@ -15,8 +15,6 @@ export function Cars({ carData }:CarsProps) {
     const { data: user} = useAppSelector(s => s.user);
     const { data: favorite} = useAppSelector(s => s.favorite);
 
-    if (!favorite) return "";
-
     return (
         <>
             <div className="container py-8 mt-20">
@@ -30,7 +28,7 @@ export function Cars({ carData }:CarsProps) {
                                 <h4 className="text-[#848484] font-light text-sm">{car.car_model}</h4>
                             </div>
                             <div className="z-40">
-                                {favorite.data?.some((fav:any) => fav.id === car.id) 
+                                {!favorite ? "" : favorite.data?.some((fav:any) => fav.id === car.id) 
                                     ? <FaHeart 
                                         onClick={(e) => {
                                             e.preventDefault();

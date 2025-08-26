@@ -20,7 +20,6 @@ export async function createCarAction(
     const name = formData.get("name")?.toString() ?? "";
     const carModel = formData.get("car_model")?.toString() ?? "";
     const year = formData.get("year")?.toString() ?? "";
-    const color = formData.get("color")?.toString() ?? "";
     const passengers = formData.get("passengers")?.toString() ?? "";
     const transmission = formData.get("transmission")?.toString() ?? "";
     const fuel = formData.get("fuel")?.toString() ?? "";
@@ -38,7 +37,6 @@ export async function createCarAction(
     body.append("name", name);
     body.append("car_model", carModel);
     body.append("year", year);
-    body.append("color", color);
     body.append("passengers", passengers);
     body.append("transmission", transmission);
     body.append("fuel", fuel);
@@ -67,6 +65,63 @@ export async function createCarAction(
     return { success: true, message: "Carro criado com sucesso" };
   } catch (error: any) {
     return { success: false, message: error?.message ?? "Erro ao criar carro." };
+  }
+}
+
+const isValidImage = (f: File | null | undefined) =>
+  !!f && f.size > 0 && /^image\//i.test(f.type || '');
+
+export async function updateCarAction(
+  _prev: UpdateResult,
+  formData: FormData,
+  id: number
+): Promise<UpdateResult> {
+  try {
+    const token = (await cookies()).get('user-token')?.value;
+    if (!token) return { success: false, message: 'Token de autenticação não encontrado.' };
+
+    const body = new FormData();
+    // campos textuais
+    body.append('name', formData.get('name')?.toString() ?? '');
+    body.append('car_model', formData.get('car_model')?.toString() ?? '');
+    body.append('year', formData.get('year')?.toString() ?? '');
+    body.append('passengers', formData.get('passengers')?.toString() ?? '');
+    body.append('transmission', formData.get('transmission')?.toString() ?? '');
+    body.append('fuel', formData.get('fuel')?.toString() ?? '');
+    body.append('fuel_capacity', formData.get('fuel_capacity')?.toString() ?? '');
+    body.append('price_per_hour', formData.get('price_per_hour')?.toString() ?? '');
+    body.append('price_per_day', formData.get('price_per_day')?.toString() ?? '');
+    body.append('price_per_week', formData.get('price_per_week')?.toString() ?? '');
+    body.append('description', formData.get('description')?.toString() ?? '');
+
+    // (opcional) preservar imagens atuais
+    const existingImageUrl = formData.get('existing_image_url')?.toString() ?? '';
+    const existingThumbs = formData.get('existing_thumbnail_urls')?.toString() ?? '';
+    if (existingImageUrl) body.append('existing_image_url', existingImageUrl);
+    if (existingThumbs)   body.append('existing_thumbnail_urls', existingThumbs);
+
+    // capa (somente se arquivo válido)
+    const image = formData.get('image_url') as File | null;
+    if (isValidImage(image)) {
+      body.append('image_url', image!, image!.name || 'cover.jpg');
+    }
+
+    // thumbs (apenas válidas, até 5)
+    (formData.getAll('thumbnail_urls') as File[])
+      .filter(isValidImage)
+      .slice(0, 5)
+      .forEach((f) => body.append('thumbnail_urls', f, f.name || 'thumb.jpg'));
+
+    // axios: NÃO defina 'Content-Type' manualmente
+    await api.put(`/car/updateCar/${id}`, body, {
+      headers: { Authorization: `Bearer ${token}` },
+      maxBodyLength: Infinity, // evita problemas com arquivos maiores
+    });
+
+    return { success: true, message: 'Carro atualizado com sucesso' };
+  } catch (error: any) {
+    const msg = error?.response?.data?.message || error?.message || 'Erro ao atualizar carro.';
+    return { success: false, message: msg };
   }
 }
 
@@ -101,6 +156,27 @@ export async function createCarReview(
     } catch (error:any) {
       return { success: false, message: error?.message ?? "Erro ao criar avaliação." };
     }
+}
+
+export async function deleteCar(id:number) {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("user-token")?.value;
+
+    if (!token) {
+      return { success: false, message: "Token de autenticação não encontrado." };
+    }
+
+    await api.delete("/car/deleteCar/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  } catch (error) {
+    console.log('Tivemos um erro ao deletar o carro', error)
+  }
+
+  revalidatePath("/admin/carsAdmin");
 }
 
 export async function favoriteACar(carId: number, userProfileId: number) {

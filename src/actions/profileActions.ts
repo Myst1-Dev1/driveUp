@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 export interface UpdateResult {
   success: boolean;
   message?: string;
+  id?:number;
 }
 
 export async function updateProfileAction(

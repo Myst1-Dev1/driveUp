@@ -1,12 +1,14 @@
 'use client';
 
 import { CarType } from "@/@types/Car";
+import { deleteCar } from "@/actions/carActions";
 import { AdminHeader } from "@/components/admin/adminHeader";
 import { CarModal } from "@/components/admin/carModal";
 import { SideBar } from "@/components/admin/sideBar";
 import Image from "next/image";
 import { useState } from "react";
 import { FaGasPump, FaLifeRing, FaPencilAlt, FaSearch, FaTrashAlt, FaUsers } from "react-icons/fa";
+import { UpdateCarModal } from "../carModal/updateCarModal";
 
 interface CarAdminContentProps {
     cars: CarType[];
@@ -14,8 +16,8 @@ interface CarAdminContentProps {
 
 export function CarAdminContent({ cars }:CarAdminContentProps) {
     const [isCarModalOpen, setIsCarModalOpen] = useState(false);
-        
-    console.log(cars);
+    const [isCarUpdateModalOpen, setIsCarUpdateModalOpen] = useState(false);
+    const [getCarId, setGetCarId] = useState(0);
 
     return (
         <>
@@ -33,31 +35,35 @@ export function CarAdminContent({ cars }:CarAdminContentProps) {
                             <button onClick={() => setIsCarModalOpen(true)} className="bg-blue-500 text-white p-3 rounded-lg max-w-48 w-full font-semibold cursor-pointer transition-all duration-500 hover:brightness-90">Adicionar Carro +</button>
                         </div>
                         <div className="py-8 grid grid-cols-1 lg:grid-cols-3 gap-8 place-items-center">
-                            <div className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
-                                <div className="flex flex-col gap-1">
-                                    <h3 className="font-bold">Koenigsegg</h3>
-                                    <h4 className="text-[#848484] font-light text-sm">Sport</h4>
-                                </div>   
-                                <Image className="max-w-80 m-auto w-full object-cover" src="/images/car.png" width={300} height={100} alt="foto do carro" />
-                                <div className="w-full flex justify-between">
-                                    <div className="text-[#848484] flex items-center gap-2">
-                                        <FaGasPump /> <span className="text-sm">90L</span>
+                            {cars?.map(car => (
+                                <div key={car.id} className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                                    <div className="flex flex-col gap-1">
+                                        <h3 className="font-bold">{car.name}</h3>
+                                        <h4 className="text-[#848484] font-light text-sm">{car.car_model}</h4>
+                                    </div>   
+                                    <Image className="max-w-80 h-32 m-auto w-full object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
+                                    <div className="w-full flex justify-between">
+                                        <div className="text-[#848484] flex items-center gap-2">
+                                            <FaGasPump /> <span className="text-xs">{car.fuel_capacity}L</span>
+                                        </div>
+                                        <div className="text-[#848484] flex items-center gap-2">
+                                            <FaLifeRing /> <span className="text-xs">{car.transmission}</span>
+                                        </div>
+                                        <div className="text-[#848484] flex items-center gap-2">
+                                            <FaUsers /> <span className="text-xs">{car.passengers} Assentos</span>
+                                        </div>
                                     </div>
-                                    <div className="text-[#848484] flex items-center gap-2">
-                                        <FaLifeRing /> <span className="text-sm">Manual</span>
-                                    </div>
-                                    <div className="text-[#848484] flex items-center gap-2">
-                                        <FaUsers /> <span className="text-sm">5 Assentos</span>
+                                    <div className="mt-4 flex justify-between items-center">
+                                        <h5 className="font-bold text-[18px]">{Intl.NumberFormat('pt-br', {
+                                            style:"currency", currency: "BRL"
+                                        }).format(car.price_per_day)}/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
+                                        <div className="flex gap-4">
+                                            <span onClick={() => {setGetCarId(car.id); setIsCarUpdateModalOpen(true)}} className="cursor-pointer w-7 h-7 rounded-md grid place-items-center text-white bg-green-500 text-sm transition-all duration-500 hover:brightness-90"><FaPencilAlt /></span>
+                                            <span onClick={() => deleteCar(car.id)} className="cursor-pointer w-7 h-7 rounded-md grid place-items-center text-white bg-red-600 text-sm transition-all duration-500 hover:brightness-90"><FaTrashAlt /></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="mt-4 flex justify-between items-center">
-                                    <h5 className="font-bold text-[18px]">R$:250,00/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
-                                    <div className="flex gap-4">
-                                        <span className="w-7 h-7 rounded-md grid place-items-center text-white bg-green-500 text-sm transition-all duration-500 hover:brightness-90"><FaPencilAlt /></span>
-                                        <span className="w-7 h-7 rounded-md grid place-items-center text-white bg-red-600 text-sm transition-all duration-500 hover:brightness-90"><FaTrashAlt /></span>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                         <div className="flex justify-end items-end w-full gap-4 mt-8">
                             <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">1</span>
@@ -69,6 +75,7 @@ export function CarAdminContent({ cars }:CarAdminContentProps) {
                 </div>
             </div>
             <CarModal isOpenModal={isCarModalOpen} setIsOpenModal={setIsCarModalOpen} />
+            <UpdateCarModal isOpenModal={isCarUpdateModalOpen} setIsOpenModal={setIsCarUpdateModalOpen} data={cars} carId={getCarId} />
         </>
     )
 }
