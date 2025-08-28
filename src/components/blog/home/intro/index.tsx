@@ -1,11 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export function Intro() {
     return (
         <>
             <div className="flex lg:flex-row flex-col">
                 <div className="lg:mt-0 mt-16 min-h-96 lg:min-h-screen w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start">
-                    <Image src="/images/blog-logo.png" className="absolute top-2 left-2 w-36 object-cover" width={200} height={200} alt="logo do blog" />
+                    <Link href="/blog">
+                        <Image src="/images/blog-logo.png" className="absolute top-2 left-2 w-36 object-cover" width={200} height={200} alt="logo do blog" />
+                    </Link>
                     <div className="max-w-md w-full flex gap-3 flex-col px-5">
                         <h1 className="text-xl lg:text-3xl font-semibold">As últimas novidades e avaliações sobre carros</h1>
                         <p className="text-sm font-light text-gray-600">Fique por dentro das últimas noticias dos melhores carros da atualidade</p>

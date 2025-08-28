@@ -18,7 +18,7 @@ export function RecentPosts() {
                             <span className="bg-gray-200 p-2 rounded-xl font-light text-[10px] lg:text-xs">Técnologia Automobilistica</span>
                             <span className="bg-gray-200 p-2 rounded-xl font-light text-[10px] lg:text-xs">Técnologia Automobilistica</span>
                         </div>
-                        <Link href="/blog" className="w-fit cursor-pointer flex gap-5 items-center font-semibold text-blue-500 py-3 transition-all duration-500 hover:px-3 hover:bg-blue-300 hover:text-white">Saiba Mais <FaLongArrowAltRight className="text-xl" /></Link>
+                        <Link href="/post/1" className="w-fit cursor-pointer flex gap-5 items-center font-semibold text-blue-500 py-3 transition-all duration-500 hover:px-3 hover:bg-blue-300 hover:text-white">Saiba Mais <FaLongArrowAltRight className="text-xl" /></Link>
                     </div>
                     <div className="flex flex-col gap-4">
                         <div className="w-full flex flex-col lg:flex-row gap-4">
