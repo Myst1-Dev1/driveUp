@@ -94,6 +94,30 @@ export async function updatePostAction(
   }
 }
 
+export async function createComment(_prev: UpdateResult,
+  formData: FormData, id: number): Promise<UpdateResult> {
+
+    try {
+      const cookieStore = await cookies();
+      const token = cookieStore.get('user-token')?.value;
+      if (!token) return { success: false, message: 'Token de autenticação não encontrado.' };
+
+      const name = formData.get('name')?.toString();
+      const avatarUrl = formData.get('avatarUrl')?.toString();
+      const comment = formData.get('comment')?.toString();
+
+      await api.post(`/blog/createComment/${id}`, { name, avatarUrl, comment }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+      return { success: true, message:"Comentário criado com sucesso." };
+    } catch (error:any) {
+      return { success: false, message: error?.message ?? "Erro ao criar artigo." };
+    }
+}
+
 export async function deletePostAction(id:number) {
   try {
     const cookieStore = await cookies();

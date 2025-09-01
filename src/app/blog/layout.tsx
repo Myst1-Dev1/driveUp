@@ -1,5 +1,6 @@
 import { Footer } from "@/components/blog/footer";
 import type { Metadata } from "next";
+import Providers from "@/services/store/Providers";
 
 export const metadata: Metadata = {
   title: "Drive Up",
@@ -13,8 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <>
+      <Providers>
         {children}
         <Footer />
+      </Providers>
     </>
   );
 }

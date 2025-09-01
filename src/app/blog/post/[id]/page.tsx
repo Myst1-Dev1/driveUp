@@ -1,9 +1,22 @@
+"use server";
+
+import { Posts } from "@/@types/Posts";
+import { PostCommentForm } from "@/components/blog/postCommentForm";
+import { getPostById } from "@/services/getPostById";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { FaComments } from "react-icons/fa6";
 
-export default function Post() {
+export default async function Post({ params }:any) {
+    const { id } = await params;
+
+    const data = await getPostById(id);
+
+    const postData:Posts = data.data[0];
+
+    console.log(postData);
+
     return (
         <>
             <Link href="/blog">
@@ -11,47 +24,44 @@ export default function Post() {
             </Link>
             <div className="container py-16 mt-10 flex flex-wrap gap-10 lg:gap-0 justify-between">
                 <div className="lg:max-w-2xl w-full">
-                    <Image src="/images/car-img.jpg" className="w-full h-80 rounded-md object-cover mb-4" width={400} height={400} alt="foto do post" />
-                    <span className="text-blue-400 text-[14px]">29 de janeiro, 2025</span>
-                    <h3 className="text-2xl font-semibold py-3">Explorando os carros do futuro: Inovações que estão transformando a indústria automobilistica</h3>
-                    <p className="font-light text-gray-500 text-sm mb-4"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ut perferendis reiciendis sapiente tempore, fugit quo aperiam animi nesciunt dolorum neque quos vitae cupiditate eos eligendi suscipit, recusandae id error!</p>
+                    <Image src={postData?.post_image_url || "/images/car-img.jpg"} className="w-full h-80 rounded-md object-cover mb-4" width={400} height={400} alt="foto do post" />
+                    <span className="text-blue-400 text-[14px]">
+                        {new Date(postData?.createdAt).toLocaleDateString("pt-BR", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                        })}
+                    </span>
+                    <h3 className="text-2xl font-semibold py-3">{postData?.post_title}</h3>
+                    <p className="font-light text-gray-500 text-sm mb-4"> {postData?.post_description}</p>
+                    <div className="flex flex-wrap gap-4 mb-3">
+                        {postData?.post_categories?.map((categorie, index:number) => (
+                            <span key={index} className="bg-gray-200 p-2 rounded-xl font-light text-[10px] lg:text-xs transition-all duration-500 hover:bg-rose-400">{categorie}</span>
+                        ))}
+                    </div>
                     
                     <div className="mt-10">
                         <div className="flex items-center gap-4 font-semibold">
                             <FaComments className="text-xl" /> Faça um comentário
                         </div>
-                        <form action="" className="mt-6 w-full flex justify-between flex-col lg:flex-row items-center gap-5 border border-gray-300 p-3 rounded-md transition-all duration-500 hover:bg-rose-200 hover:border-transparent">
-                            <div className="flex items-center gap-4 flex-1 w-full">
-                                <Image src="/images/uploadUserPhoto.png" className="w-12 h-12 rounded-full aspect-square object-cover" width={200} height={200} alt="foto do usuário logado" />
-                                <textarea placeholder="Escreva um comentário" className="resize-none h-12 scrollDontShow w-full p-3 outline-none border-b border-gray-300" />
-                            </div>
-                            <button className="max-w-20 h-10 grid place-items-center cursor-pointer w-full rounded-full text-white bg-rose-500 font-semibold transition-all duration-500 hover:bg-rose-700">Enviar</button>
-                        </form>
+                        <PostCommentForm postId={postData?.id} />
                         <div className="flex flex-col gap-6 mt-10">
-                            <div className="flex gap-4">
-                                <Image src="/images/user.jpg" className="w-12 h-12 rounded-full object-cover aspect-square" width={200} height={200} alt="foto do usuário" />
-                                <div>
-                                    <span className="text-gray-400 font-light text-xs">03/04/2025</span>
-                                    <h4 className="font-semibold text-xl">Jane Doe</h4>
-                                    <p className="mt-4 w-full text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nisi, sed dicta iusto doloremque, accusantium molestiae autem non, odio officia iure possimus. Mollitia fuga reiciendis facilis ut, accusantium repellendus odit.</p>
+                            {postData?.post_comments?.map((comment, index:number) => (
+                                <div key={index} className="flex gap-4">
+                                    <Image src={comment.avatarUrl || "/images/user.jpg"} className="w-12 h-12 rounded-full object-cover aspect-square" width={200} height={200} alt="foto do usuário" />
+                                    <div>
+                                        <span className="text-gray-400 font-light text-xs">
+                                            {new Date(comment.createdAt).toLocaleDateString("pt-BR", {
+                                                day: "2-digit",
+                                                month: "2-digit",
+                                                year: "numeric",
+                                            })}
+                                        </span>
+                                        <h4 className="font-semibold text-xl">{comment.name}</h4>
+                                        <p className="mt-4 w-full text-sm">{comment.comment}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex gap-4">
-                                <Image src="/images/user.jpg" className="w-12 h-12 rounded-full object-cover aspect-square" width={200} height={200} alt="foto do usuário" />
-                                <div>
-                                    <span className="text-gray-400 font-light text-xs">03/04/2025</span>
-                                    <h4 className="font-semibold text-xl">Jane Doe</h4>
-                                    <p className="mt-4 w-full text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nisi, sed dicta iusto doloremque, accusantium molestiae autem non, odio officia iure possimus. Mollitia fuga reiciendis facilis ut, accusantium repellendus odit.</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-4">
-                                <Image src="/images/user.jpg" className="w-12 h-12 rounded-full object-cover aspect-square" width={200} height={200} alt="foto do usuário" />
-                                <div>
-                                    <span className="text-gray-400 font-light text-xs">03/04/2025</span>
-                                    <h4 className="font-semibold text-xl">Jane Doe</h4>
-                                    <p className="mt-4 w-full text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nisi, sed dicta iusto doloremque, accusantium molestiae autem non, odio officia iure possimus. Mollitia fuga reiciendis facilis ut, accusantium repellendus odit.</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                         <div className="mt-10">
                             <h5 className="text-xl font-semibold">Artigos Relacionados</h5>
