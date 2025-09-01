@@ -13,7 +13,7 @@ export default async function Home() {
     <>
       <Intro />
       <PopularCars />
-      <Cars carData = {data.data} />
+      <Cars carData = {data?.data} />
       <KnowOurBlog />
     </>
   );

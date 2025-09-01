@@ -1,9 +1,14 @@
-import { BlogAdminContent } from "@/components/admin/blogAdminContent";
+'use server';
 
-export default function BlogAdmin() {
+import { BlogAdminContent } from "@/components/admin/blogAdminContent";
+import { getPosts } from "@/services/getPosts";
+
+export default async function BlogAdmin() {
+    const postsData = await getPosts();
+
     return (
         <>
-            <BlogAdminContent />
+            <BlogAdminContent postsData = { postsData?.data } />
         </>
     )
 }
