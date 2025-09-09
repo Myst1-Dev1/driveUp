@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { FaCalendarAlt, FaFilter } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
+import Link from "next/link";
 
 export function Intro() {
     return (
@@ -8,7 +7,8 @@ export function Intro() {
             <div className="flex justify-center flex-col gap-3 items-center w-full min-h-screen bg-gradient-to-b from-[#7EA4F6] to-[#304BA2] rounded-bl-[60px] rounded-br-[60px] lg:rounded-bl-[500px] lg:rounded-br-[500px]">
                 <h1 className="text-white text-center font-bold text-2xl lg:text-4xl">A Melhor Plataforma Para <br />Aluguel de Carros</h1>
                 <p className="font-light text-sm text-white text-center max-w-80 w-full">Abrimos a porta para você explorar o mundo com comforto e estilo, sendo seu parceiro de viagem de confiança</p>
-                <div className="z-10 mt-4 bg-white px-3 py-5 rounded-xl lg:rounded-full max-w-80 lg:max-w-3xl w-full flex flex-col lg:flex-row justify-between items-center gap-5 lg:gap-0">
+                <Link href="#carros" className="z-30 text-center block mx-auto max-w-32 w-full p-3 bg-black text-white rounded-full border-none cursor-pointer mt-4 font-semibold transition-all duration-500 hover:bg-blue-600">Ver Carros</Link>
+                {/* <div className="z-10 mt-4 bg-white px-3 py-5 rounded-xl lg:rounded-full max-w-80 lg:max-w-3xl w-full flex flex-col lg:flex-row justify-between items-center gap-5 lg:gap-0">
                     <div className="flex flex-col gap-4 lg:gap-0 lg:flex-row w-full justify-center lg:justify-between">
                             <div className="flex items-center gap-4 w-full">
                                 <FaLocationDot className="shrink-0" />
@@ -41,7 +41,7 @@ export function Intro() {
                         <div className="shrink-0 w-10 h-10 rounded-full bg-[#496CF9] text-white grid place-items-center cursor-pointer transition-all duration-500 hover:bg-blue-900">
                             <FaFilter />
                         </div>
-                </div>
+                </div> */}
             </div>
             <Image className="m-auto -mt-32 lg:-mt-[260px] max-w-3xl w-full" src="/images/car-intro.png" width={800} height={300} alt="carro da introdução" />
         </>

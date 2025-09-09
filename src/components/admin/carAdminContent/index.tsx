@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaGasPump, FaLifeRing, FaPencilAlt, FaSearch, FaTrashAlt, FaUsers } from "react-icons/fa";
 import { UpdateCarModal } from "../carModal/updateCarModal";
+import { Pagination } from "@/components/pagination";
 
 interface CarAdminContentProps {
     cars: CarType[];
@@ -34,14 +35,27 @@ export function CarAdminContent({ cars }:CarAdminContentProps) {
                             </div>
                             <button onClick={() => setIsCarModalOpen(true)} className="bg-blue-500 text-white p-3 rounded-lg max-w-48 w-full font-semibold cursor-pointer transition-all duration-500 hover:brightness-90">Adicionar Carro +</button>
                         </div>
-                        <div className="py-8 grid grid-cols-1 lg:grid-cols-3 gap-8 place-items-center">
-                            {cars?.map(car => (
-                                <div key={car.id} className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                            <Pagination
+                                data={cars}
+                                itemsPerPage={6}
+                                renderItem={(car) => (
+                                <div
+                                    key={car.id}
+                                    className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3"
+                                >
                                     <div className="flex flex-col gap-1">
                                         <h3 className="font-bold">{car.name}</h3>
-                                        <h4 className="text-[#848484] font-light text-sm">{car.car_model}</h4>
-                                    </div>   
-                                    <Image className="max-w-80 h-32 m-auto w-full object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
+                                        <h4 className="text-[#848484] font-light text-sm">
+                                            {car.car_model}
+                                        </h4>
+                                    </div>
+                                    <Image
+                                        className="max-w-80 h-32 m-auto w-full object-cover"
+                                        src={car.image_url || "/images/car.png"}
+                                        width={300}
+                                        height={100}
+                                        alt="foto do carro"
+                                    />
                                     <div className="w-full flex justify-between">
                                         <div className="text-[#848484] flex items-center gap-2">
                                             <FaGasPump /> <span className="text-xs">{car.fuel_capacity}L</span>
@@ -54,23 +68,35 @@ export function CarAdminContent({ cars }:CarAdminContentProps) {
                                         </div>
                                     </div>
                                     <div className="mt-4 flex justify-between items-center">
-                                        <h5 className="font-bold text-[18px]">{Intl.NumberFormat('pt-br', {
-                                            style:"currency", currency: "BRL"
-                                        }).format(car.price_per_day)}/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
+                                        <h5 className="font-bold text-[18px]">
+                                            {Intl.NumberFormat("pt-br", {
+                                            style: "currency",
+                                            currency: "BRL",
+                                            }).format(car.price_per_day)}
+                                            /{" "}
+                                            <span className="text-[#848484] font-light text-sm">Diária</span>
+                                        </h5>
                                         <div className="flex gap-4">
-                                            <span onClick={() => {setGetCarId(car.id); setIsCarUpdateModalOpen(true)}} className="cursor-pointer w-7 h-7 rounded-md grid place-items-center text-white bg-green-500 text-sm transition-all duration-500 hover:brightness-90"><FaPencilAlt /></span>
-                                            <span onClick={() => deleteCar(car.id)} className="cursor-pointer w-7 h-7 rounded-md grid place-items-center text-white bg-red-600 text-sm transition-all duration-500 hover:brightness-90"><FaTrashAlt /></span>
+                                            <span
+                                                onClick={() => {
+                                                    setGetCarId(car.id);
+                                                    setIsCarUpdateModalOpen(true);
+                                                }}
+                                                className="cursor-pointer w-7 h-7 rounded-md grid place-items-center text-white bg-green-500 text-sm transition-all duration-500 hover:brightness-90"
+                                                >
+                                                <FaPencilAlt />
+                                            </span>
+                                            <span
+                                                onClick={() => deleteCar(car.id)}
+                                                className="cursor-pointer w-7 h-7 rounded-md grid place-items-center text-white bg-red-600 text-sm transition-all duration-500 hover:brightness-90"
+                                                >
+                                                <FaTrashAlt />
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                        <div className="flex justify-end items-end w-full gap-4 mt-8">
-                            <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">1</span>
-                            <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">2</span>
-                            <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">...</span>
-                            <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">4</span>
-                        </div>
+                                )}
+                            />
                     </div>
                 </div>
             </div>

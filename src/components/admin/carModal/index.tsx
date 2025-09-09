@@ -1,4 +1,5 @@
 import { createCarAction } from "@/actions/carActions";
+import { Loading } from "@/components/loading";
 import { Modal } from "@/components/modal";
 import React, { useActionState, useState } from "react";
 import { FaCloudUploadAlt, FaPlus } from "react-icons/fa";
@@ -42,7 +43,6 @@ export function CarModal({ isOpenModal, setIsOpenModal }:CarModalProps) {
                             </div>
                         </label>
 
-                        {/* Renderiza até 5 imagens */}
                         <div className="flex w-full justify-between">
                             {files && Array.from(files).slice(0, 5).map((file, index) => (
                             <div
@@ -55,7 +55,6 @@ export function CarModal({ isOpenModal, setIsOpenModal }:CarModalProps) {
                                 }}
                             />
                             ))}
-                            {/* Espaços vazios se o número de imagens for menor que 5 */}
                             {files && Array.from(files).length < 5 &&
                             [...Array(5 - files.length)].map((_, index) => (
                                 <div key={index} className="w-14 h-14 lg:w-24 lg:h-24 bg-gray-200" />
@@ -90,9 +89,9 @@ export function CarModal({ isOpenModal, setIsOpenModal }:CarModalProps) {
                         disabled={pending}
                         aria-disabled={pending}
                         className={`font-semibold cursor-pointer p-3 w-full rounded-lg text-white transition-all duration-500 mt-5 text-xl
-                            ${pending ? 'opacity-80 cursor-not-allowed' : 'bg-black hover:bg-blue-400'}`}
+                            ${pending ? 'cursor-not-allowed opacity-70' : 'bg-black hover:bg-blue-400'}`}
                         >
-                        {pending ? 'Carregando...' : 'Criar Carro'}
+                        {pending ? <Loading /> : 'Criar Carro'}
                     </button>
                 </form> 
             </Modal>

@@ -8,6 +8,7 @@ import { deletePostAction } from "@/actions/blogActions";
 import { Posts } from "@/@types/Posts";
 import { UpdatePost } from "./updatePost";
 import { CreatePost } from "./createPost";
+import { Pagination } from "@/components/pagination";
 
 interface BlogAdminContentProps {
     postsData: Posts[];
@@ -41,12 +42,15 @@ export function BlogAdminContent({ postsData }:BlogAdminContentProps) {
                             )}
                         </div>
                         {editArticle === "view" &&
-                        <div>
-                            <div className="mt-10 flex flex-col gap-4">
-                                {postsData?.map(post => (
+                     
+                            <Pagination 
+                                data={postsData}
+                                itemsPerPage={4}
+                                gridColumn={true}
+                                renderItem={(post) => (
                                     <div key={post.id} className="relative flex flex-col p-3 border border-gray-300 rounded-md w-full transition-all duration-500 cursor-pointer group hover:bg-blue-400">
                                         <h3 className="text-blue-600 font-semibold group-hover:text-white">{post.post_title}</h3>
-                                        <p className="text-gray-400 font-light text-sm group-hover:text-white">{post.post_description}</p>
+                                        <p className="text-gray-400 font-light text-sm group-hover:text-white line-clamp-1">{post.post_description}</p>
                                         <span className="mt-3 flex items-center gap-2 text-gray-400 text-xs group-hover:text-white font-light">
                                             <FaCalendarAlt className="text-sm" />
                                             {new Date(post.createdAt).toLocaleDateString("pt-BR", {
@@ -60,15 +64,8 @@ export function BlogAdminContent({ postsData }:BlogAdminContentProps) {
                                             <span onClick={() => deletePostAction(post.id)} className="w-7 h-7 rounded-md bg-red-300 text-white cursor-pointer grid place-items-center transition-all duration-500 hover:bg-red-500"><FaTrashAlt /></span>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                            <div className="flex justify-end items-end w-full gap-4 mt-8">
-                                <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">1</span>
-                                <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">2</span>
-                                <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">...</span>
-                                <span className="cursor-pointer font-semibold transtion-all duration-500 hover:bg-blue-400 text-white w-8 h-8 grid place-items-center bg-gray-600 rounded-md">4</span>
-                            </div>
-                        </div>
+                                )}
+                            />
                         }
                         {editArticle === "edit" && 
                             <div className="mt-10">

@@ -51,10 +51,10 @@ export function Footer() {
                 <div className="container w-full py-6 flex justify-center gap-4 lg:gap-0 lg:justify-between flex-col lg:flex-row">
                     <p className="text-[#DFE5F6] font-semibold">@2025 DriveUp, todos os direitos reservados</p>
                     <div className="text-white flex gap-4 flex-col lg:flex-row">
-                        <Link href="" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Home</Link>
-                        <Link href="" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Quem Somos</Link>
-                        <Link href="" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Serviços</Link>
-                        <Link href="" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Contato</Link>
+                        <Link href="/" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Home</Link>
+                        <Link href="/woWeAre" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Quem Somos</Link>
+                        <Link href="/services" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Serviços</Link>
+                        <Link href="contact" className="font-medium text-sm transition-all duration-500 hover:text-blue-400">Contato</Link>
                     </div>
                 </div>
                 <div className="border border-t-blue-100 py-6">

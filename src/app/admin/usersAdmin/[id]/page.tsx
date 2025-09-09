@@ -1,10 +1,21 @@
+'use server';
+
+import { Profile } from "@/@types/Profile";
 import { AdminHeader } from "@/components/admin/adminHeader";
 import { SideBar } from "@/components/admin/sideBar";
+import { getProfiles } from "@/services/getProfiles";
 import Image from "next/image";
-import { FaEnvelope } from "react-icons/fa";
 import { FaAddressCard, FaBuilding, FaCalendar, FaPhone } from "react-icons/fa6";
 
-export default function AdminProfileUser() {
+export default async function AdminProfileUser({ params }: any) {
+    const { id } = params;
+
+    const profileUserData = await getProfiles();
+
+    const userData = profileUserData.data?.filter((user: any) => user.id === Number(id));
+
+    const data: Profile = userData[0];
+
     return (
         <>
             <div className="flex">
@@ -13,15 +24,20 @@ export default function AdminProfileUser() {
                     <AdminHeader />
                     <div className="py-8 px-8">
                         <div className="flex items-center gap-10">
-                            <Image src="/images/user.jpg" className="w-24 h-24 object-cover rounded-full aspect-square" width={200} height={200} alt="foto  do usuário" />
+                            <Image src={data?.avatarUrl || "/images/user.jpg"} className="w-24 h-24 object-cover rounded-full aspect-square" width={200} height={200} alt="foto  do usuário" />
                             <div className="flex flex-col gap-4">
-                                <h3 className="text-xl font-bold">Jane Doe</h3>
+                                <h3 className="text-xl font-bold">{data?.fullName}</h3>
                                 <div className="grid grid-cols-2 max-w-96 gap-3">
-                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaEnvelope /> jane@gmail.com</span>
-                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaAddressCard /> 123.445.789-00</span>
-                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaPhone /> 21 9 99444 8909</span>
-                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaBuilding /> Rua John Lorem</span>
-                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaCalendar /> 22/08/1990</span>
+                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaAddressCard /> {data?.cpfCnpj}</span>
+                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaPhone /> {data?.phone}</span>
+                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaBuilding /> {data?.address}</span>
+                                    <span className="flex items-center gap-3 text-gray-400 text-sm"><FaCalendar /> 
+                                        {new Date(data?.birthDate).toLocaleDateString("pt-BR", {
+                                            day: "2-digit",
+                                            month: "2-digit",
+                                            year: "numeric",
+                                        })}
+                                    </span>
                                 </div>
                             </div>
                         </div>

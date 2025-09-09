@@ -27,8 +27,8 @@ export function AddRelatedPosts({ postData, relatedPost, handleDeleteRelatedPost
                     {relatedPost?.map((rlPost:any) => (
                     <div key={rlPost.id} className="relative bg-white p-3 rounded-md max-w-48 w-full flex flex-col">
                         <Image src={rlPost.post_image_url || "/images/car-img.jpg"} className="w-full h-32 object-cover rounded-md" width={200} height={200} alt="foto do artigo relacionado" />
-                        <h5 className="mt-3">{rlPost.post_title}</h5>
-                        <p className="text-gray-500 font-light text-sm">{rlPost.post_description}</p>
+                        <h5 className="mt-3 line-clamp-1">{rlPost.post_title}</h5>
+                        <p className="text-gray-500 font-light text-sm line-clamp-1">{rlPost.post_description}</p>
                         <span className="text-xs font-light mt-3 text-blue-400">
                             {new Date(rlPost.createdAt).toLocaleDateString("pt-BR", {
                                 day: "2-digit",
@@ -46,11 +46,11 @@ export function AddRelatedPosts({ postData, relatedPost, handleDeleteRelatedPost
 
             <Modal maxWidth="max-w-md" isOpenModal={relatedPostsModal} setIsOpenModal={setRelatedPostsModal}>
                 <h3 className="py-4 text-center font-semibold text-xl">Adicione artigos relacionados</h3>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-5 overflow-y-auto h-80 scrollDontShow">
                     {postData?.map(post => (
                         <div onClick={() => handleAddARelatedPostToPost(post.id)} key={post.id} className="relative flex flex-col p-3 border border-gray-300 rounded-md w-full transition-all duration-500 cursor-pointer group hover:bg-blue-400">
                             <h3 className="text-blue-600 font-semibold group-hover:text-white">{post.post_title}</h3>
-                            <p className="text-gray-400 font-light text-sm group-hover:text-white">{post.post_description}</p>
+                            <p className="text-gray-400 font-light text-sm group-hover:text-white line-clamp-1">{post.post_description}</p>
                             <span className="mt-3 flex items-center gap-2 text-gray-400 text-xs group-hover:text-white font-light">
                                 <FaCalendarAlt className="text-sm" />
                                 {new Date(post.createdAt).toLocaleDateString("pt-BR", {

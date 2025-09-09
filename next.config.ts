@@ -2,17 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'greekherald.com.au',
-      },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-      },
-    ],
-  },
+    domains: ["greekherald.com.au", "res.cloudinary.com", "live.dealer-asset.co", "img.freepik.com"],
+  }
 };
 
 export default nextConfig;

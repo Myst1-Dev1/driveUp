@@ -12,7 +12,7 @@ export function Intro() {
                     <div className="max-w-md w-full flex gap-3 flex-col px-5">
                         <h1 className="text-xl lg:text-3xl font-semibold">As últimas novidades e avaliações sobre carros</h1>
                         <p className="text-sm font-light text-gray-600">Fique por dentro das últimas noticias dos melhores carros da atualidade</p>
-                        <button className="font-semibold max-w-36 w-full rounded-md text-white cursor-pointer px-3 py-2 bg-rose-500 transition-all duration-500 hover:brightness-90">Saiba Mais</button>
+                        <button className="font-semibold max-w-36 w-full rounded-md text-white cursor-pointer px-3 py-2 bg-blue-500 transition-all duration-500 hover:brightness-90">Saiba Mais</button>
                     </div>
                 </div>
                 <div className="lg:mt-0 -mt-20 px-4 lg:px-0 relative lg:absolute lg:top-1/2 top-0 left-0 lg:left-1/2 translate-x-0 lg:-translate-x-1/2 translate-y-0 lg:-translate-y-1/2">

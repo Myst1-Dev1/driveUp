@@ -3,7 +3,7 @@
 import { Cars } from "@/components/principal/home/cars";
 import { Intro } from "@/components/principal/home/intro";
 import { KnowOurBlog } from "@/components/principal/home/knowOurBlog";
-import { PopularCars } from "@/components/principal/home/popularCars";
+import { MarketPlace } from "@/components/principal/home/marketPlace";
 import { getCars } from "@/services/getCars";
 
 export default async function Home() {
@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <>
       <Intro />
-      <PopularCars />
+      <MarketPlace />
       <Cars carData = {data?.data} />
       <KnowOurBlog />
     </>

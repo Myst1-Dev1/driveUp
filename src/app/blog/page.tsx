@@ -11,7 +11,7 @@ export default async function Home() {
     return (
         <>
             <Intro />
-            <RecentPosts />
+            <RecentPosts posts = {posts?.data} />
             <AllPosts posts = {posts?.data} />
         </>
     )
