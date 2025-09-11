@@ -15,7 +15,7 @@ export function UserBox({ closeUserBox }: UserBoxProps) {
     const dispatch = useAppDispatch();
     const { data: user, status } = useAppSelector(s => s.user);
 
-    if (status === 'loading') return <p>Carregando...</p>;
+    // if (status === 'loading') return <p>Carregando...</p>;
     if (!user) return <p>Sem usuário.</p>;
 
     return (

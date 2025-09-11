@@ -12,7 +12,7 @@ export function UserFavorites() {
         <>
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 overflow-y-auto h-full scrollDontShow lg:h-96">
                 {favorite.data?.length === 0 ? 'Nenhum carro encontrado' : favorite.data?.map((car: any) => (
-                    <Link key={car.id} href={`/car/${car.id}`} className="max-w-72 w-full p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
+                    <Link key={car.id} href={`/car/${car.id}`} className="max-w-72 w-full h-fit p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
                         <div className="flex justify-between">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">{car.name}</h3>
@@ -41,7 +41,7 @@ export function UserFavorites() {
                                 }
                             </div>
                         </div>
-                        <Image className="max-w-80 m-auto w-full h-32 object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
+                        <Image className="w-full h-32 object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
                         {/* <div className="w-full flex justify-between">
                             <div className="text-[#848484] flex items-center gap-2">
                                 <FaGasPump /> <span className="text-xs">{car.fuel_capacity}L</span>
@@ -53,9 +53,8 @@ export function UserFavorites() {
                                 <FaUsers /> <span className="text-xs">{car.passengers} Assentos</span>
                             </div>
                         </div> */}
-                        <div className="mt-4 flex justify-between items-center">
+                        <div className="mt-4">
                             <h5 className="font-bold text-[18px]">{Intl.NumberFormat("pt-br",{style: 'currency', currency:'BRL'}).format(car.price_per_day)}/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
-                            <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button>
                         </div>
                     </Link>
                 ))}

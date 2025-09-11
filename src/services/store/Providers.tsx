@@ -21,6 +21,7 @@ export default function Providers({ children }: { children: ReactNode }) {
 function StartupEffects() {
   const dispatch = useAppDispatch();
   const { data: user } = useAppSelector(s => s.user);
+  const { data: favorite } = useAppSelector(s => s.favorite);
 
   const userId = user?.data[0].userId;
 
@@ -30,7 +31,7 @@ function StartupEffects() {
 
   useEffect(() => {
     if (userId) dispatch(fetchFavorite(userId));
-  }, [dispatch, userId]);
+  }, [user, favorite]);
 
   return null;
 }

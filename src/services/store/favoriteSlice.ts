@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { api } from '@/services/axios';
 
 export interface Favorite {
   data: [
@@ -30,8 +29,14 @@ export const fetchFavorite = createAsyncThunk<Favorite, number>(
   'user/fetchFavorite',
   async (id, { rejectWithValue }) => {
     try {
-      const res = await api.get('car/favorites/' + id);
-      return res.data as Favorite;
+      const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'car/favorites/' + id, {
+        method:'GET',
+        cache: 'no-store'
+      });
+
+      const data = await res.json();
+
+      return data as Favorite;
     } catch (e: any) {
       return rejectWithValue(
         e?.response?.data?.message || e.message || 'Erro ao buscar perfil'
