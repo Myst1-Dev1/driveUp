@@ -1,11 +1,22 @@
-import { api } from "../axios";
 
 export async function getCarById(id: number) {
-    try {
-        const res = await api.get("/car/getCar/" + id);
+     try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car/getCar/` + id, {
+      method: "GET",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        return res.data;
-    } catch (error) {
-        console.log(error);
+    if (!res.ok) {
+      throw new Error(`Erro na API: ${res.status}`);
     }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Erro no getCars:", error);
+    return null;
+  }
 }

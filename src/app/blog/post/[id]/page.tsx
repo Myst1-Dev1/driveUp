@@ -15,8 +15,6 @@ export default async function Post({ params }:any) {
 
     const postData:Posts = data.data[0];
 
-    console.log(postData);
-
     return (
         <>
             <Link href="/blog">

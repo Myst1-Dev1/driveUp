@@ -16,9 +16,8 @@ export function UserReserves({ cars, profile }:UserReservesProps) {
     return (
         <>
             <div className="grid grid-cols-1 overflow-y-auto h-full scrollDontShow lg:h-[420px] 2xl:grid-cols-2 gap-5">
-                {reserveData?.map(car => {
+                {reserveData.length === 0 ? 'Nenhuma reserva feita' : reserveData?.map(car => {
                     const carRentals = profile?.rentalHistory?.filter(rental => rental.carId === car.id) || [];
-                    console.log('aqui',carRentals)
 
                     return (
                         <div key={car.id}>

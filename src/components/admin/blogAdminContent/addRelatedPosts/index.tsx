@@ -14,8 +14,6 @@ interface AddRelatedPostsProps {
 export function AddRelatedPosts({ postData, relatedPost, handleDeleteRelatedPost, handleAddARelatedPostToPost }:AddRelatedPostsProps) {
     const [relatedPostsModal, setRelatedPostsModal] = useState(false);
 
-    console.log(relatedPost);
-
     return (
         <>
             <div className="flex flex-col gap-3 mb-4">

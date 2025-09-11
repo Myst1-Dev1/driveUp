@@ -21,8 +21,6 @@ export function ProfileContent({ data, carData }:ProfileContentProps) {
     const [activeMenu, setActiveMenu] = useState("data");
 
     const profile = data[0];
-
-    console.log(profile);
     
     return (
         <>

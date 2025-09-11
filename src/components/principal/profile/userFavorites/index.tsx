@@ -12,14 +12,19 @@ export function UserFavorites() {
         <>
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 overflow-y-auto h-full scrollDontShow lg:h-96">
                 {favorite.data?.length === 0 ? 'Nenhum carro encontrado' : favorite.data?.map((car: any) => (
-                    <Link key={car.id} href={`/car/${car.id}`} className="max-w-72 w-full h-fit p-3 rounded-lg bg-[#fff] flex flex-col gap-3">
-                        <div className="flex justify-between">
+                    <Link key={car.id} href={`/car/${car.id}`} className="mb-10 max-w-72 w-full rounded-lg bg-[#fff] flex flex-col gap-3">
+                        <Image className="max-w-80 m-auto w-full h-32 object-cover rounded-tr-lg rounded-tl-lg" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
+                        <div className="flex justify-between px-3">
                             <div className="flex flex-col gap-1">
                                 <h3 className="font-bold">{car.name}</h3>
                                 <h4 className="text-[#848484] font-light text-sm">{car.car_model}</h4>
                             </div>
                             <div className="z-40">
-                                {favorite.data?.some((fav:any) => fav.id === car.id) 
+                                {!favorite ? 
+                                    <FaRegHeart
+                                        className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600"
+                                    /> 
+                                    : favorite.data?.some((fav:any) => fav.id === car.id) 
                                     ? <FaHeart 
                                         onClick={(e) => {
                                             e.preventDefault();
@@ -36,25 +41,14 @@ export function UserFavorites() {
                                             favoriteACar(car.id, user?.data[0].userId);
                                         }}
                                         className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600"
-                                        />
+                                    />
                                     )
                                 }
                             </div>
                         </div>
-                        <Image className="w-full h-32 object-cover" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
-                        {/* <div className="w-full flex justify-between">
-                            <div className="text-[#848484] flex items-center gap-2">
-                                <FaGasPump /> <span className="text-xs">{car.fuel_capacity}L</span>
-                            </div>
-                            <div className="text-[#848484] flex items-center gap-2">
-                                <FaLifeRing /> <span className="text-xs">{car.transmission}</span>
-                            </div>
-                            <div className="text-[#848484] flex items-center gap-2">
-                                <FaUsers /> <span className="text-xs">{car.passengers} Assentos</span>
-                            </div>
-                        </div> */}
-                        <div className="mt-4">
+                        <div className="my-3 px-3">
                             <h5 className="font-bold text-[18px]">{Intl.NumberFormat("pt-br",{style: 'currency', currency:'BRL'}).format(car.price_per_day)}/ <span className="text-[#848484] font-light text-sm">Diária</span></h5>
+                            {/* <button className="bg-[#3E5EF0] text-white rounded-full max-w-20 w-full px-1 py-2 cursor-pointer transition-all duration-500 hover:bg-blue-700">Alugar</button> */}
                         </div>
                     </Link>
                 ))}

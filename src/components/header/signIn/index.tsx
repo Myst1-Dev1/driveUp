@@ -1,4 +1,5 @@
 import { signInAction } from "@/actions/signActions";
+import { Loading } from "@/components/loading";
 import React, { useActionState, useEffect } from "react";
 
 interface SignInProps {
@@ -30,10 +31,10 @@ export function SignIn({ setFormType, setIsModalOpen }:SignInProps) {
                         type="submit"
                         disabled={pending}
                         aria-disabled={pending}
-                        className={`font-semibold cursor-pointer p-3 w-full rounded-lg text-white transition-all duration-500 mt-5 text-xl
-                            ${pending ? 'opacity-80 cursor-not-allowed' : 'bg-black hover:bg-blue-400'}`}
+                        className={`font-semibold p-3 w-full rounded-lg text-white bg-black hover:bg-blue-400 transition-all duration-500 mt-5 text-xl
+                            ${pending ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                         >
-                        {pending ? 'Carregando...' : 'Entrar'}
+                        {pending ? <Loading /> : 'Entrar'}
                     </button>
                 </form>
             </div>

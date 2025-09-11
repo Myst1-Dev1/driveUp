@@ -38,7 +38,6 @@ export async function createPostAction(
     body.append("post_description", post_description);
     body.append("related_posts", relatedPosts); // Passa como string JSON
 
-    console.log(body);
 
     await api.post("/blog/createPost", body, {
       headers: {

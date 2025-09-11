@@ -54,8 +54,6 @@ export async function createCarAction(
       body.append("thumbnail_urls", file, file.name);
     });
 
-    console.log(body);
-
     await api.post("/car/createCar", body, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -141,8 +139,6 @@ export async function createCarReview(
     const evaluatorName = formData.get("evaluatorName")?.toString() ?? "";
     const evaluatorUrl = formData.get("evaluatorUrl")?.toString() ?? "";
     const comment = formData.get("comment")?.toString() ?? "";
-
-    console.log(evaluatorUrl, evaluatorName, comment);
 
     try {
       

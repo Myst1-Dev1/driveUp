@@ -64,7 +64,9 @@ export async function signUpAction(_: SignInResult, formData: FormData): Promise
   try {
     await api.post("/auth/register", { email, phone, address, cpfCnpj, passwordHash, birthDate });
 
-    return { success: true };
+    revalidatePath('/');
+
+    return { success: true, message: 'Conta criada com sucesso!' };
     
   } catch (error:any) {
     const message =

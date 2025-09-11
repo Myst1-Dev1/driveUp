@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { UpdateResult } from "./profileActions";
 import { api } from "@/services/axios";
+import { revalidatePath } from "next/cache";
 
 export async function createRental( _prev: UpdateResult,
   formData: FormData,
@@ -30,6 +31,8 @@ export async function createRental( _prev: UpdateResult,
             },
         });
 
+        revalidatePath('/car/' + carId);
+
          return { success: true, message: "Aluguel criado com sucesso" };
     } catch (error) {
          return { success: false, message: "Erro ao criar o aluguel" };
@@ -54,6 +57,8 @@ export async function returnRental(id: number) {
                 },
             }
         );
+
+        revalidatePath('/profile');
 
         console.log('Aluguel devolvido com sucesso!');
     } catch (error) {
@@ -80,8 +85,12 @@ export async function cancelRental(id: number) {
             }
         );
 
+        revalidatePath('/profile');
+
         console.log('Aluguel cancelado com sucesso!');
     } catch (error) {
         console.log('Tivemos um erro ao cancelar o carro', error);
     }
+
+    revalidatePath('/profile');
 }

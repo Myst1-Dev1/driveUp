@@ -18,10 +18,6 @@ export function BlogAdminContent({ postsData }:BlogAdminContentProps) {
     const [editArticle, setEditArticle] = useState("view");
     const [postId, setPostId] = useState(0);
 
-    console.log(editArticle);
-
-    console.log(postsData);
-
     return (
         <>
             <div className="flex">

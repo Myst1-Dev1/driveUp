@@ -55,7 +55,7 @@ export function Header() {
                     {formType === "signIn" ?
                     <SignIn setFormType = {setFormType} setIsModalOpen = {setIsModalOpen} />
                     :
-                    <SignUp setFormType = {setFormType}/>
+                    <SignUp setFormType = {setFormType} />
                     }
                 </div>
             </Modal>

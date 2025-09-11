@@ -1,12 +1,35 @@
 import { signUpAction } from "@/actions/signActions";
-import React, { useActionState } from "react";
+import { Loading } from "@/components/loading";
+import React, { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface SignUpProps {
     setFormType:React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function SignUp({ setFormType }:SignUpProps) {
-    const [formState, formAction, pending] = useActionState(signUpAction, { success: false });
+
+    async function handleCreateAccount(prevState: any, formData: FormData) {
+        const result = await signUpAction(prevState, formData);
+
+        if (result?.message) {
+            if (result.success) {
+                toast.success(result.message);
+            } else {
+                toast.error(result.message);
+            }
+        }
+
+        return result;
+    }
+
+    const [formState, formAction, pending] = useActionState(handleCreateAccount, { success: false });
+
+    useEffect(() => {
+        if (formState.success) {
+            setFormType('signIn');
+        }
+    }, [formState.success, setFormType]);
 
     return (
         <>
@@ -34,10 +57,10 @@ export function SignUp({ setFormType }:SignUpProps) {
                         type="submit"
                         disabled={pending}
                         aria-disabled={pending}
-                        className={`font-semibold cursor-pointer p-3 w-full rounded-lg text-white transition-all duration-500 mt-5 text-xl
-                            ${pending ? 'opacity-80 cursor-not-allowed' : 'bg-black hover:bg-blue-400'}`}
+                        className={`font-semibold p-3 w-full rounded-lg text-white bg-black hover:bg-blue-400 transition-all duration-500 mt-5 text-xl
+                            ${pending ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                         >
-                        {pending ? 'Carregando...' : 'Cadastrar'}
+                        {pending ? <Loading /> : 'Cadastrar'}
                     </button>
                 </form>
             </div>
