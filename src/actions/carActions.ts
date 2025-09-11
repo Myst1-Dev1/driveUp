@@ -147,10 +147,12 @@ export async function createCarReview(
     try {
       
       await api.post("/car/createCarReview/" + id, { evaluatorUrl, evaluatorName , comment }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      revalidatePath(`/car/${id}`);
       
       return { success: true, message: "Avaliação criada com sucesso" };
     } catch (error:any) {
@@ -193,7 +195,7 @@ export async function favoriteACar(carId: number, userProfileId: number) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
+    });
   } catch (error) {
     console.log('Tivemos um erro ao favoritar o carro', error)
   }
@@ -215,6 +217,7 @@ export async function deleteFavorite(carId: number, userProfileId: number) {
       data: { carId, userProfileId },
       headers: { Authorization: `Bearer ${token}` },
     });
+
   } catch (error) {
     console.log('Tivemos um erro ao remover o favorito', error)
   }

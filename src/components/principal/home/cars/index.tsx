@@ -5,6 +5,7 @@ import { deleteFavorite, favoriteACar } from "@/actions/carActions";
 import { useAppSelector } from "@/services/store/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaGasPump, FaHeart, FaLifeRing, FaRegHeart, FaUsers } from "react-icons/fa";
 
@@ -16,7 +17,8 @@ export function Cars({ carData }:CarsProps) {
     const { data: user} = useAppSelector(s => s.user);
     const { data: favorite} = useAppSelector(s => s.favorite);
 
-    const [carCounter, setCarCounter] = useState(8)
+    const [carCounter, setCarCounter] = useState(8);
+    const router = useRouter();
 
     return (
         <>
@@ -41,6 +43,7 @@ export function Cars({ carData }:CarsProps) {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
+                                            router.refresh();
                                             deleteFavorite(car.id, user?.data[0].userId);
                                         }}
                                         className="text-red-500 transition-all duration-500 cursor-pointer hover:text-blue-600" 
@@ -50,6 +53,7 @@ export function Cars({ carData }:CarsProps) {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
+                                            router.refresh();
                                             favoriteACar(car.id, user?.data[0].userId);
                                         }}
                                         className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600"

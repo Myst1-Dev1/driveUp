@@ -10,12 +10,14 @@ import { UserFavorites } from "./userFavorites";
 import { UserReserves } from "./userReserves";
 import { UserTransactions } from "./userTransactions";
 import { Profile } from "@/@types/Profile";
+import { CarType } from "@/@types/Car";
 
 interface ProfileContentProps {
     data: Profile[];
+    carData: CarType[];
 }
 
-export function ProfileContent({ data }:ProfileContentProps) {
+export function ProfileContent({ data, carData }:ProfileContentProps) {
     const [activeMenu, setActiveMenu] = useState("data");
 
     const profile = data[0];
@@ -55,7 +57,7 @@ export function ProfileContent({ data }:ProfileContentProps) {
                     {activeMenu === 'data' && <UserData profile = {profile} />}
                     {activeMenu === 'card' && <UserCards />}
                     {activeMenu === 'transaction' && <UserTransactions />}
-                    {activeMenu === 'reserve' && <UserReserves />}
+                    {activeMenu === 'reserve' && <UserReserves cars = {carData} profile = {profile} />}
                     {activeMenu === 'favorite' && <UserFavorites />}
                 </div>
             </div>

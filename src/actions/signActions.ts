@@ -1,6 +1,7 @@
 'use server'
 
 import { api } from "@/services/axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from 'next/headers';
 
 export interface SignInResult {
@@ -28,6 +29,8 @@ export async function signInAction(_: SignInResult, formData: FormData): Promise
       path: "/",
       maxAge: 60 * 60 * 24 * 1 // 1 dia
     });
+
+    revalidatePath('/');
 
     return { success: true };
   } catch (error: any) {

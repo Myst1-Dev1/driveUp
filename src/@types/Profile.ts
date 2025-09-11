@@ -9,5 +9,18 @@ export type Profile = {
     cpfCnpj: string;
     favorites: [];
     phone: string;
-    rentalHistory: [];
+    rentalHistory: RentalHistory[];
+}
+
+type RentalHistory = {
+    carId: number;
+    createdAt: string;
+    dropoffLocation: string;
+    endDate: string;
+    id: number;
+    pickupLocation: string;
+    startDate: string;
+    status: string;
+    totalPrice: number;
+    userId: number;
 }

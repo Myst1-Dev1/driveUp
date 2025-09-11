@@ -11,8 +11,6 @@ export async function KnowOurBlog() {
 
     const blogData = data?.data?.slice(0,3);
 
-    console.log(blogData);
-
     return (
         <>
             <div className="container mt-20 py-8">

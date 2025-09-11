@@ -10,6 +10,7 @@ import { parseCookies } from "nookies";
 import { UserBox } from "./userBox";
 import { SignIn } from "./signIn";
 import { SignUp } from "./signUp";
+import { useAppSelector } from "@/services/store/hooks";
 
 export function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,12 +19,13 @@ export function Header() {
     const [isUserBoxOpen, setIsUserBoxOpen] = useState(false);
 
     const { "user-token": token } = parseCookies();
+    const { data: user, status } = useAppSelector(s => s.user);
 
     return (
         <>
             <header className="container py-6 flex justify-between items-center w-full absolute top-0 left-0 right-0">
                 <Image className="w-40 h-10 object-cover" src="/images/logo-dark.png" width={200} height={200} alt="logo" />
-                <div className={`flex flex-col lg:flex-row gap-5 items-center transition-all duration-500 lg:max-w-md w-full lg:relative lg:bg-transparent justify-center lg:justify-normal z-20 bg-white fixed top-0 lg:left-0 ${isMobileMenuOpen ? 'left-0' : '-left-full'} right-0 h-full`}>
+                <div className={`flex flex-col lg:flex-row gap-5 items-center transition-all duration-500 lg:max-w-md w-full lg:relative lg:bg-transparent justify-center lg:justify-normal z-50 bg-white fixed top-0 lg:left-0 ${isMobileMenuOpen ? 'left-0' : '-left-full'} right-0 h-full`}>
                     <nav className="flex justify-center lg:justify-normal items-center flex-col lg:flex-row gap-4 w-full">
                         <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="/">Home</Link>
                         <Link onClick={() => setIsMobileMenuOpen(false)} className="font-medium transition-all duration-500 hover:text-blue-600" href="/woWeAre">Quem somos</Link>

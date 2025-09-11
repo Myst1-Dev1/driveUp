@@ -26,7 +26,7 @@ function StartupEffects() {
 
   useEffect(() => {
     dispatch(fetchProfile());
-  }, [dispatch]);
+  }, [user]);
 
   useEffect(() => {
     if (userId) dispatch(fetchFavorite(userId));
