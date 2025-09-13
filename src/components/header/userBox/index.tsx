@@ -6,21 +6,28 @@ import Link from "next/link";
 import { FaClock, FaCog, FaSignOutAlt, FaTimes, FaUserCircle } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/services/store/hooks";
 import { signOut } from "@/services/store/userSlice";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface UserBoxProps {
+    isUserBoxOpen: boolean;
     closeUserBox:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function UserBox({ closeUserBox }: UserBoxProps) {
+export function UserBox({ isUserBoxOpen, closeUserBox }: UserBoxProps) {
     const dispatch = useAppDispatch();
     const { data: user, status } = useAppSelector(s => s.user);
 
     // if (status === 'loading') return <p>Carregando...</p>;
     if (!user) return <p>Sem usuário.</p>;
 
+    useGSAP(() => {
+        gsap.fromTo(".user-box-content", { height: 0, opacity: 0 }, { height: '269px', opacity: 1, duration: 0.2, ease: "power1.inOut" });
+    }, [isUserBoxOpen]);
+
     return (
         <>
-            <div className="absolute top-20 z-30 shadow-md shadow-gray-500 right-5 bg-white max-w-48 w-full rounded-xl">
+            <div className="user-box-content absolute top-20 z-30 shadow-md shadow-gray-500 right-5 bg-white max-w-48 w-full rounded-xl">
                 <div onClick={() => closeUserBox(false)} className="absolute top-2 right-2 cursor-pointer w-8 h-8 bg-black rounded-full grid place-items-center text-white transition-all duration-500 hover:bg-blue-400">
                     <FaTimes />
                 </div>

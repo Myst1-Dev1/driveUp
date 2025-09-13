@@ -2,12 +2,15 @@ import { signUpAction } from "@/actions/signActions";
 import { Loading } from "@/components/loading";
 import React, { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 interface SignUpProps {
+    formType: string;
     setFormType:React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUp({ setFormType }:SignUpProps) {
+export function SignUp({ formType, setFormType }:SignUpProps) {
 
     async function handleCreateAccount(prevState: any, formData: FormData) {
         const result = await signUpAction(prevState, formData);
@@ -31,9 +34,13 @@ export function SignUp({ setFormType }:SignUpProps) {
         }
     }, [formState.success, setFormType]);
 
+    useGSAP(() => {
+        gsap.fromTo('.signUpForm', { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" });
+    }, [formType]);
+
     return (
         <>
-             <div>
+             <div className="signUpForm">
                 <h2 className="font-semibold text-center text-xl mt-5">Criar conta</h2>
                 <form action={formAction} className="mt-5">
                     <div className="flex flex-col lg:flex-row gap-4 mb-0 lg:mb-5">

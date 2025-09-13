@@ -17,6 +17,8 @@ export async function signInAction(_: SignInResult, formData: FormData): Promise
     return { success: false, message: "Campos obrigatórios." };
   }
 
+  console.log("Fazendo login com:", { email, password });
+
   try {
     const res = await api.post("/auth/login", { email, password });
 

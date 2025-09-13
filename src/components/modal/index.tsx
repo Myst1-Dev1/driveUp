@@ -1,4 +1,9 @@
+'use client';
+
 import React from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { FaTimes } from "react-icons/fa";
 
 interface ModalProps {
     maxWidth: string;
@@ -8,13 +13,23 @@ interface ModalProps {
 }
 
 export function Modal({ maxWidth, isOpenModal, setIsOpenModal, children }: ModalProps) {
+    useGSAP(() => {
+        if (isOpenModal) {
+            gsap.fromTo(".modal-body", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+        }
+    }, [isOpenModal]);
+
     return (
         <>
         {isOpenModal &&
-            <div onClick={() => setIsOpenModal(false)} className="fixed z-50 top-0 left-0 right-0 w-full min-h-screen bg-black/40">
+            <div onClick={() => setIsOpenModal(false)} className="modal-container fixed z-50 top-0 left-0 right-0 w-full min-h-screen bg-black/40">
                 <div 
                     onClick={(e) => e.stopPropagation()}
-                    className={`rounded-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 ${maxWidth} w-full`}>
+                    className={`modal-body rounded-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 ${maxWidth} w-full`}>
+                    <div onClick={() => setIsOpenModal(false)} className="w-10 h-10 bg-black text-white grid place-items-center rounded-full absolute top-5 right-5 cursor-pointer transition-all duration-500 hover:bg-blue-400">
+                        <FaTimes />
+                    </div>
+                    
                     {children}
                 </div>
             </div>

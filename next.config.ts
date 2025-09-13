@@ -2,7 +2,32 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["greekherald.com.au", "res.cloudinary.com", "live.dealer-asset.co", "img.freepik.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "greekherald.com.au",
+        port: "",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "live.dealer-asset.co",
+        port: "",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+        port: "",
+        pathname: "/**"
+      },
+    ]
   }
 };
 

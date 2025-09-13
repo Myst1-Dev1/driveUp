@@ -1,13 +1,16 @@
 import { signInAction } from "@/actions/signActions";
 import { Loading } from "@/components/loading";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import React, { useActionState, useEffect } from "react";
 
 interface SignInProps {
+    formType: string;
     setFormType:React.Dispatch<React.SetStateAction<string>>;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function SignIn({ setFormType, setIsModalOpen }:SignInProps) {
+export function SignIn({ formType ,setFormType, setIsModalOpen }:SignInProps) {
     const [formState, formAction, pending] = useActionState(signInAction, { success: false });
 
     useEffect(() => {
@@ -16,9 +19,13 @@ export function SignIn({ setFormType, setIsModalOpen }:SignInProps) {
         }
     }, [formState.success, setIsModalOpen]);
 
+    useGSAP(() => {
+        gsap.fromTo('.signInForm', { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" });
+    }, [formType]);
+
     return (
         <>
-            <div>
+            <div className="signInForm">
                 <h2 className="font-semibold text-center text-xl mt-5">Bem vindo</h2>
                 <form action={formAction} className="mt-5">
                     <input className="mb-5 input" name="email" type="email" placeholder="Email" />
