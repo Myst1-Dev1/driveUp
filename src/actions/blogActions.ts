@@ -45,6 +45,8 @@ export async function createPostAction(
       },
     });
 
+    revalidatePath("/admin/blogAdmin");
+
     return { success: true, message: "Artigo criado com sucesso" };
   } catch (error: any) {
     return { success: false, message: error?.message ?? "Erro ao criar artigo." };
@@ -86,6 +88,8 @@ export async function updatePostAction(
         Authorization: `Bearer ${token}`,
       },
     });
+
+    revalidatePath("/admin/blogAdmin");
 
     return { success: true, message: 'Artigo atualizado com sucesso' };
   } catch (error: any) {

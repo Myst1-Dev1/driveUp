@@ -30,7 +30,7 @@ export function PostCommentForm({ postId }:PostCommentFormProps) {
                         <input type="text" className="hidden" name="avatarUrl" defaultValue={user?.data[0]?.avatarUrl} />
                         <textarea name="comment" placeholder="Escreva um comentário" className="resize-none h-12 scrollDontShow w-full p-3 outline-none border-b border-gray-300" />
                     </div>
-                    <button className="max-w-20 h-10 grid place-items-center cursor-pointer w-full rounded-full text-white bg-black font-semibold transition-all duration-500 hover:bg-rose-700">
+                    <button className="max-w-20 h-10 grid place-items-center cursor-pointer w-full rounded-full text-white bg-black font-semibold transition-all duration-500 hover:bg-blue-400">
                         {pending ?
                             <div role="status" className="grid place-items-center m-auto">
                                 <svg aria-hidden="true" className="w-5 h-5 text-gray-200 animate-spin dark:text-white fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

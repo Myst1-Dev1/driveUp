@@ -8,7 +8,7 @@ export default async function CarsAdmin() {
 
     return (
         <>
-            <CarAdminContent cars = {data.data} />
+            <CarAdminContent cars = {data?.data} />
         </>
     )
 }

@@ -1,5 +1,6 @@
 import { Profile } from "@/@types/Profile";
 import { updateProfileAction } from "@/actions/profileActions";
+import { Loading } from "@/components/loading";
 import Image from "next/image";
 import { useActionState, useState } from "react";
 import { FaUpload } from "react-icons/fa";
@@ -30,7 +31,7 @@ export function UserData({ profile }:UserDataProps) {
                 </div>
                 <input type="date" className="input text-gray-500" defaultValue={profile?.birthDate ? profile.birthDate.split("T")[0] : ""} name="birthDate" />
                 <button className="mt-3 max-w-60 w-full bg-black text-white rounded-md p-3 cursor-pointer block mx-auto transition-all duration-500 hover:bg-blue-400">
-                    {pending ? 'Carregando...' : 'Atualizar'}
+                    {pending ? <Loading /> : 'Atualizar'}
                 </button>
                 {!state.success && state.message && (
                     <p className="text-red-500 text-sm text-center">{state.message}</p>

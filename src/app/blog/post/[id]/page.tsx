@@ -34,7 +34,7 @@ export default async function Post({ params }:any) {
                     <PostDescription postData={postData?.post_description} />
                     <div className="flex flex-wrap gap-4 mb-3">
                         {postData?.post_categories?.map((categorie, index:number) => (
-                            <span key={index} className="bg-gray-200 p-2 rounded-xl font-light text-[10px] lg:text-xs transition-all duration-500 hover:bg-rose-400">{categorie}</span>
+                            <span key={index} className="bg-gray-200 p-2 rounded-xl font-light text-[10px] lg:text-xs transition-all duration-500 hover:bg-blue-400 hover:text-white">{categorie}</span>
                         ))}
                     </div>
                     
@@ -63,7 +63,7 @@ export default async function Post({ params }:any) {
                         </div>
                         <div className="mt-10">
                             {postData?.related_posts.length === 0 ? '' : <h5 className="text-xl font-semibold">Artigos Relacionados</h5>}
-                            <div className="mt-6 flex justify-between gap-6 lg:gap-0 w-full flex-wrap">
+                            <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
                                 {postData?.related_posts.length === 0 ? '' : postData?.related_posts.map(related => (
                                     <Link href={`/blog/post/${related.id}`} key={related.id} className="flex gap-4 items-center">
                                         <Image src={related.post_image_url || "/images/car-img.jpg"} className="max-w-28 rounded-md w-full h-28" width={200} height={200} alt="foto do post" />

@@ -11,7 +11,7 @@ interface AllPostsProps {
 }
 
 export function AllPosts({ posts }:AllPostsProps) {
-    const [counterPosts, setCountePosts] = useState(6);
+    const [counterPosts, setCounterPosts] = useState(6);
 
     return (
         <>
@@ -39,7 +39,7 @@ export function AllPosts({ posts }:AllPostsProps) {
                         </div>
                     ))}
                 </div>
-                <button onClick={() => setCountePosts(counterPosts + 3)} className="block mx-auto max-w-32 cursor-pointer w-full p-3 rounded-full bg-black text-white font-semibold transition-all duration-500 hover:bg-blue-400 mt-6">Ver mais</button>
+                {posts?.length === 6 ? '' : <button onClick={() => setCounterPosts(counterPosts + 3)} className="block mx-auto max-w-32 cursor-pointer w-full p-3 rounded-full bg-black text-white font-semibold transition-all duration-500 hover:bg-blue-400 mt-6">Ver mais</button>}
             </div>
         </>
     )

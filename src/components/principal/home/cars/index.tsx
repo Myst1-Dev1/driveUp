@@ -5,9 +5,9 @@ import { deleteFavorite, favoriteACar } from "@/actions/carActions";
 import { useAppSelector } from "@/services/store/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaGasPump, FaHeart, FaLifeRing, FaRegHeart, FaUsers } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 interface CarsProps {
     carData: CarType[];
@@ -15,10 +15,23 @@ interface CarsProps {
 
 export function Cars({ carData }:CarsProps) {
     const { data: user} = useAppSelector(s => s.user);
-    const { data: favorite, status} = useAppSelector(s => s.favorite);
+    const { data: favorite} = useAppSelector(s => s.favorite);
 
     const [carCounter, setCarCounter] = useState(8);
-    const router = useRouter();
+    
+    async function handleFavoriteCar(carId: number) {
+        if (user?.data && user.data.length > 0) {
+            await favoriteACar(carId, user?.data[0].userId);
+            toast.success("Carro adicionado aos favoritos!");
+        }
+    }
+
+    async function handleDeleteFavoriteCar(carId: number) {
+        if (user?.data && user.data.length > 0) {
+            await deleteFavorite(carId, user?.data[0].userId);
+            toast.success("Carro removido dos favoritos!");
+        }
+    }
 
     return (
         <>
@@ -43,7 +56,7 @@ export function Cars({ carData }:CarsProps) {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
-                                            deleteFavorite(car.id, user?.data[0].userId);
+                                            handleDeleteFavoriteCar(car.id);
                                         }}
                                         className="text-red-500 transition-all duration-500 cursor-pointer hover:text-blue-600" 
                                     /> 
@@ -52,7 +65,7 @@ export function Cars({ carData }:CarsProps) {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
-                                            favoriteACar(car.id, user?.data[0].userId);
+                                            handleFavoriteCar(car.id);
                                         }}
                                         className="text-gray-500 transition-all duration-500 cursor-pointer hover:text-blue-600"
                                     />

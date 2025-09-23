@@ -60,6 +60,8 @@ export async function createCarAction(
       },
     });
 
+    revalidatePath("/admin/carsAdmin");
+
     return { success: true, message: "Carro criado com sucesso" };
   } catch (error: any) {
     return { success: false, message: error?.message ?? "Erro ao criar carro." };
@@ -79,7 +81,7 @@ export async function updateCarAction(
     if (!token) return { success: false, message: 'Token de autenticação não encontrado.' };
 
     const body = new FormData();
-    // campos textuais
+
     body.append('name', formData.get('name')?.toString() ?? '');
     body.append('car_model', formData.get('car_model')?.toString() ?? '');
     body.append('year', formData.get('year')?.toString() ?? '');
@@ -110,11 +112,12 @@ export async function updateCarAction(
       .slice(0, 5)
       .forEach((f) => body.append('thumbnail_urls', f, f.name || 'thumb.jpg'));
 
-    // axios: NÃO defina 'Content-Type' manualmente
     await api.put(`/car/updateCar/${id}`, body, {
       headers: { Authorization: `Bearer ${token}` },
-      maxBodyLength: Infinity, // evita problemas com arquivos maiores
+      maxBodyLength: Infinity,
     });
+
+    revalidatePath("/admin/carsAdmin");
 
     return { success: true, message: 'Carro atualizado com sucesso' };
   } catch (error: any) {

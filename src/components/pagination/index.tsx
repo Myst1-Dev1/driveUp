@@ -12,18 +12,18 @@ interface PaginationProps<T> {
 export function Pagination<T>({ data, itemsPerPage, renderItem, gridColumn }: PaginationProps<T>) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(data?.length / itemsPerPage);
 
   const currentData = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
-    return data.slice(start, start + itemsPerPage);
+    return data?.slice(start, start + itemsPerPage);
   }, [currentPage, data, itemsPerPage]);
 
   return (
     <div className="flex flex-col gap-6">
       {/* Renderiza os itens da página atual */}
-      <div className={`grid grid-cols-1 ${gridColumn ? '' : 'lg:grid-cols-3'} gap-8 place-items-center py-10`}>
-        {currentData.map(renderItem)}
+      <div className={`grid grid-cols-1 ${gridColumn ? '' : 'md:grid-cols-2 lg:grid-cols-3'} 2xl:grid-cols-4 gap-8 place-items-center py-10`}>
+        {currentData?.map(renderItem)}
       </div>
 
       {/* Controles de paginação */}
@@ -36,7 +36,7 @@ export function Pagination<T>({ data, itemsPerPage, renderItem, gridColumn }: Pa
           {"<"}
         </button>
 
-        {Array.from({ length: totalPages }).map((_, idx) => {
+        {Array.from({ length: totalPages })?.map((_, idx) => {
           const page = idx + 1;
           return (
             <button

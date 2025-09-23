@@ -33,12 +33,21 @@ const token = Cookies.get('user-token');
 
 export const fetchProfile = createAsyncThunk('user/fetchProfile', async (_, { rejectWithValue }) => {
   try {
-    const res = await api.get('/user/getProfileById', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'user/getProfileById', {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
+      cache: 'no-store',
     });
-    return res.data as User;
+
+    if (!res.ok) {
+      throw new Error('Erro ao buscar perfil do usuário');
+    }
+
+    const data = await res.json();
+
+    return data as User;
   } catch (e: any) {
     return rejectWithValue(e?.response?.data?.message || e.message || 'Erro ao buscar perfil');
   }

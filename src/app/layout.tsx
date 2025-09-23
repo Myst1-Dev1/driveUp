@@ -24,7 +24,7 @@ export default function RootLayout({
         className={`${poppins.className} antialiased`}
       >
         {children}
-        <ToastContainer position="top-right" theme="light" />
+        <ToastContainer position="top-right" theme="colored" />
       </body>
     </html>
   );

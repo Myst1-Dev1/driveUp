@@ -1,6 +1,7 @@
 "use server";
 
 import { api } from "@/services/axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export interface UpdateResult {
@@ -42,6 +43,8 @@ export async function updateProfileAction(
         Authorization: `Bearer ${token}`
       },
     });
+
+    revalidatePath('/profile');
 
     return { success: true, message:"Atualizado com sucesso!" };
   } catch (e: any) {

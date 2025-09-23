@@ -58,7 +58,7 @@ export function Footer() {
                     </div>
                 </div>
                 <div className="border border-t-blue-100 py-6">
-                    <p className="text-white text-center font-medium">Desenvolvido com ❤️ por <Link href="https://www.mystdev.com.br/" target="_blank" rel="noopener noreferrer" className="text-blue-200">Myst1 Dev</Link></p>
+                    <p className="text-white text-center font-medium">Desenvolvido com ❤️ por <a href="https://www.mystdev.com.br/" target="_blank" rel="noopener noreferrer" className="text-blue-200 transition-all duration-500 hover:text-blue-400">Myst1 Dev</a></p>
                 </div>
             </footer>
         </>

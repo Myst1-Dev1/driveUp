@@ -22,7 +22,7 @@ export function PostDescription({ postData }:PostDescriptionProps) {
                     alt={`Imagem do post ${index}`}
                     width={1024}
                     height={600}
-                    className="rounded-lg mx-auto w-full h-80 object-cover object-center"
+                    className="rounded-lg mx-auto max-w-96 w-full h-40 object-cover object-center"
                 />
                 </div>
             );

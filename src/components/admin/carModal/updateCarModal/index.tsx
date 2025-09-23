@@ -1,5 +1,6 @@
 import { CarType } from "@/@types/Car";
 import { updateCarAction } from "@/actions/carActions";
+import { Loading } from "@/components/loading";
 import { Modal } from "@/components/modal";
 import React, { useActionState, useMemo, useState, useEffect } from "react";
 import { FaCloudUploadAlt, FaPlus, FaTimes, FaTrashAlt } from "react-icons/fa";
@@ -36,45 +37,36 @@ function useObjectUrls(list: FileList | null) {
   return urls;
 }
 
-/* ------------- componente ------------- */
 export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: CarModalProps) {
-  // wrapper para passar o id na server action
   const actionWithId = async (prevState: any, formData: FormData) =>
     updateCarAction(prevState, formData, carId);
 
   const [formState, formAction, pending] = useActionState(actionWithId, { success: false });
 
-  // capa nova e thumbs novas (arquivos)
   const [file, setFile] = useState<File | null>(null);
   const [files, setFiles] = useState<FileList | null>(null);
 
-  // do BD
   const car = useMemo(() => data?.find((c) => c.id === carId), [data, carId]);
 
-  // estado local das thumbs EXISTENTES (removíveis)
   const [existingThumbs, setExistingThumbs] = useState<string[]>([]);
   useEffect(() => {
     setExistingThumbs(car?.thumbnail_urls || []);
   }, [carId, car]);
 
-  // refs
   const thumbInputRef = React.useRef<HTMLInputElement>(null);
 
-  // previews
   const coverPreview = useObjectUrl(file);
   const thumbsPreview = useObjectUrls(files);
 
-  // fontes finais
   const coverSrc = coverPreview || car?.image_url || "/images/car-img.jpg";
 
   const slotsLeft = Math.max(0, MAX_THUMBS - existingThumbs.length);
   const allThumbsToShow = [...existingThumbs, ...thumbsPreview].slice(0, MAX_THUMBS);
   const blanks = Math.max(0, MAX_THUMBS - allThumbsToShow.length);
 
-  // handlers
   const handleNewFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files ? Array.from(e.target.files) : [];
-    const kept = selected.slice(0, slotsLeft); // respeita limite
+    const kept = selected.slice(0, slotsLeft);
     const dt = new DataTransfer();
     kept.forEach((f) => dt.items.add(f));
     if (thumbInputRef.current) thumbInputRef.current.files = dt.files;
@@ -83,11 +75,9 @@ export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: Car
 
   const handleRemoveThumb = (index: number) => {
     if (index < existingThumbs.length) {
-      // remove existente (vinda do BD)
       setExistingThumbs((prev) => prev.filter((_, i) => i !== index));
       return;
     }
-    // remove uma das novas (previews)
     const previewIdx = index - existingThumbs.length;
     setFiles((prev) => {
       if (!prev) return prev;
@@ -107,7 +97,6 @@ export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: Car
       setIsOpenModal={setIsOpenModal}
     >
       <form action={formAction}>
-        {/* hiddens: preservam dados atuais e refletem remoções locais */}
         <input type="hidden" name="existing_image_url" value={car?.image_url ?? ""} />
         <input
           type="hidden"
@@ -115,7 +104,6 @@ export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: Car
           value={JSON.stringify(existingThumbs)}
         />
 
-        {/* CAPA */}
         <div>
           <label
             htmlFor="carImage"
@@ -138,7 +126,6 @@ export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: Car
           />
         </div>
 
-        {/* THUMBS */}
         <div className="mt-5 flex w-full items-center gap-4">
           <label htmlFor="carImages">
             <div
@@ -187,7 +174,6 @@ export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: Car
           />
         </div>
 
-        {/* CAMPOS */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5">
           <input className="input" name="name" placeholder="Nome do carro" defaultValue={car?.name} />
           <input className="input" name="car_model" placeholder="Modelo do carro" defaultValue={car?.car_model} />
@@ -220,14 +206,13 @@ export function UpdateCarModal({ isOpenModal, setIsOpenModal, data, carId }: Car
         )}
 
         <button
-          type="submit"
-          disabled={pending}
-          aria-disabled={pending}
-          className={`cursor-pointer font-semibold p-3 w-full rounded-lg text-white transition-all duration-500 mt-5 text-xl ${
-            pending ? "opacity-80 cursor-not-allowed" : "bg-black hover:bg-blue-400"
-          }`}
-        >
-          {pending ? "Carregando..." : "Atualizar Carro"}
+            type="submit"
+            disabled={pending}
+            aria-disabled={pending}
+            className={`font-semibold cursor-pointer p-3 w-full rounded-lg text-white transition-all duration-500 mt-5 text-xl
+                ${pending ? 'cursor-not-allowed opacity-70' : 'bg-black hover:bg-blue-400'}`}
+            >
+            {pending ? <Loading /> : 'Atualizar Carro'}
         </button>
       </form>
     </Modal>
