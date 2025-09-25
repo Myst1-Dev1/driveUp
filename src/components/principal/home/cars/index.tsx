@@ -8,6 +8,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaGasPump, FaHeart, FaLifeRing, FaRegHeart, FaUsers } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface CarsProps {
     carData: CarType[];
@@ -33,13 +36,36 @@ export function Cars({ carData }:CarsProps) {
         }
     }
 
+    useGSAP(() => {
+        ScrollTrigger.create({
+            trigger: '#carros',
+            start: 'top 90%',
+            once: true,
+            onEnter:() => {
+                const tl = gsap.timeline({defaults: {duration: 0.7, ease: 'power2.out'}});
+                tl.fromTo('.car-subtitle', {y: 50, opacity: 0}, {y: 0, opacity: 1});
+                tl.fromTo('.car-box', {x: 50, opacity: 0}, {x: 0, opacity: 1, stagger: 0.2});
+                tl.fromTo('.car-btn', {y: 50, opacity: 0}, {y: 0, opacity: 1});
+            }
+        })
+    },[]);
+
+    // roda sempre que carCounter muda (novos carros aparecem)
+    useGSAP(() => {
+        gsap.fromTo(
+            `.car-box:nth-child(n+${carCounter - 3})`, // só os últimos adicionados
+            { x: 50, opacity: 0 },
+            { x: 0, opacity: 1, stagger: 0.2, duration: 1, ease: 'power2.out' }
+        );
+    }, [carCounter]);
+
     return (
         <>
             <div id="carros" className="container py-8 mt-20">
-                <h2 className="text-center text-xl font-bold">Os Melhores Carros para Alugar</h2>
+                <h2 className="car-subtitle text-center text-xl font-bold">Os Melhores Carros para Alugar</h2>
                 <div className="mt-16 grid place-items-center m-auto grid-cols-1 lg:grid-cols-4 gap-5 lg:gap-0">
                     {carData?.length === 0 ? 'Nenhum carro encontrado' : carData?.slice(0, carCounter)?.map((car: CarType) => (
-                    <Link key={car.id} href={`/car/${car.id}`} className="mb-10 max-w-72 w-full rounded-lg bg-[#fff] flex flex-col gap-3">
+                    <Link key={car.id} href={`/car/${car.id}`} className="car-box mb-10 max-w-72 w-full rounded-lg bg-[#fff] flex flex-col gap-3">
                         <Image className="max-w-80 m-auto w-full h-32 object-cover rounded-tr-lg rounded-tl-lg" src={car.image_url || "/images/car.png"} width={300} height={100} alt="foto do carro" />
                         <div className="flex justify-between px-3">
                             <div className="flex flex-col gap-1">
@@ -91,7 +117,7 @@ export function Cars({ carData }:CarsProps) {
                     </Link>
                     ))}
                 </div>
-                <button onClick={() => setCarCounter(carCounter + 4)} className="mt-8 block mx-auto cursor-pointer max-w-40 bg-black text-white rounded-2xl font-semibold p-3 transition-all duration-500 hover:bg-blue-600">Ver mais</button>
+                {carCounter < carData.length && (<button onClick={() => setCarCounter(carCounter + 4)} className="car-btn mt-8 block mx-auto cursor-pointer max-w-40 bg-black text-white rounded-2xl font-semibold p-3 transition-all duration-500 hover:bg-blue-600">Ver mais</button>)}
             </div>
         </>
     )

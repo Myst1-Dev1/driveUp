@@ -6,6 +6,10 @@ import { makeStore } from './index';
 import { fetchProfile } from './userSlice';
 import { fetchFavorite } from './favoriteSlice';
 import { useAppDispatch, useAppSelector } from './hooks';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const store = makeStore();
 

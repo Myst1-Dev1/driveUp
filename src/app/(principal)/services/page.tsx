@@ -1,7 +1,11 @@
+'use client';
+
 import Image from "next/image";
 import { FaCalendarCheck } from "react-icons/fa";
 import { FaCar, FaUserTie } from "react-icons/fa6";
-
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function Services() {
     return (
@@ -38,7 +42,7 @@ export default function Services() {
                         </p>
                     </div>
                 </div>
-                <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 place-items-center m-auto">
+                <div className="mt-38 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 place-items-center m-auto">
                     <div className="max-w-80 w-full flex flex-col gap-5">
                         <h2 className="text-xl font-bold">Conheça os Beneficios em Alugar Com Nossa Empresa</h2>
                         <ol className="list-decimal list-inside text-base text-gray-900 font-normal pl-5 space-y-2">
