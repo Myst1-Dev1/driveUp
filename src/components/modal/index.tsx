@@ -26,7 +26,7 @@ export function Modal({ maxWidth, isOpenModal, setIsOpenModal, children }: Modal
                 <div 
                     onClick={(e) => e.stopPropagation()}
                     className={`modal-body rounded-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 ${maxWidth} w-full`}>
-                    <div onClick={() => setIsOpenModal(false)} className="w-10 h-10 bg-black text-white grid place-items-center rounded-full absolute top-5 right-5 cursor-pointer transition-all duration-500 hover:bg-blue-400">
+                    <div onClick={() => setIsOpenModal(false)} className="w-7 h-7 text-sm bg-black text-white grid place-items-center rounded-full absolute top-5 right-5 cursor-pointer transition-all duration-500 hover:bg-blue-400">
                         <FaTimes />
                     </div>
                     

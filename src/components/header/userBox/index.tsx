@@ -21,6 +21,8 @@ export function UserBox({ isUserBoxOpen, closeUserBox }: UserBoxProps) {
     // if (status === 'loading') return <p>Carregando...</p>;
     if (!user) return <p>Sem usuário.</p>;
 
+    console.log(user);
+
     useGSAP(() => {
         gsap.fromTo(".user-box-content", { height: 0, opacity: 0 }, { height: '269px', opacity: 1, duration: 0.2, ease: "power1.inOut" });
     }, [isUserBoxOpen]);

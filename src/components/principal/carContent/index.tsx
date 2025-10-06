@@ -7,9 +7,11 @@ import { Loading } from "@/components/loading";
 import { Modal } from "@/components/modal";
 import { ReviewForm } from "@/components/principal/reviewForm";
 import { useAppSelector } from "@/services/store/hooks";
-import Image from "next/image";
-import { useActionState, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useActionState, useState, useRef } from "react";
 import { FaQuoteLeft } from "react-icons/fa6";
+import { Testimonials } from "./testimonials";
 
 interface CarContentProps {
     data: CarType;
@@ -25,10 +27,84 @@ export function CarContent({ data }:CarContentProps) {
     const [formState, formAction, pending] = useActionState(actionWithId, { success: false });
     const [openRentalModal, setOpenRentalModal] = useState(false);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+    const ctx = gsap.context(() => {
+
+      gsap.from(".gallery", {
+        x: -120,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".gallery",
+          start: "top 85%",
+        },
+      });
+
+      gsap.from(".car-info > *", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".car-info",
+          start: "top 85%",
+        },
+      });
+
+      gsap.from(".car-specs h6", {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: ".car-specs",
+          start: "top 85%",
+        },
+      });
+
+      gsap.fromTo(".price-box",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.1,
+          ease: "elastic.out(1, 0.6)",
+          scrollTrigger: {
+            trigger: ".price-box",
+            start: "top 80%",
+          },
+        }
+      );
+
+       gsap.fromTo(".reserve-btn",
+        { scale: 0.8, opacity: 0, y: 50 },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.5)",
+          scrollTrigger: {
+            trigger: ".reserve-btn",
+            start: "top 95%",
+          },
+        }
+      );
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
     return (
         <>
-            <div className="container py-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0">
-                <div className="max-w-xl w-full">
+            <div ref={containerRef} className="container py-12 mt-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0">
+                <div className="max-w-xl w-full gallery">
                     <Gallery
                         baseImage={data?.image_url || "/images/car-img.jpg"}
                         otherImages={data?.thumbnail_urls?.length ? data.thumbnail_urls : [
@@ -39,20 +115,20 @@ export function CarContent({ data }:CarContentProps) {
                         className="max-w-xl w-full"
                     />
                 </div>
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-8 car-info">
                     <div className="flex flex-col gap-3">
                         <h2 className="text-xl font-bold">{data?.name}</h2>
                         <span className="font-light text-xs text-gray-500">{data?.car_model}</span>
                         <p className="font-medium text-sm indent-5 leading-relaxed text-justify">{data?.description}</p>
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
+                    <div className="car-specs grid grid-cols-1 lg:grid-cols-2">
                         <h6 className="font-normal text-gray-900 text-sm mb-2">Ano do Carro: {data?.year}</h6>
                         <h6 className="font-normal text-gray-900 text-sm mb-2">Número de passageiros: {data?.passengers}</h6>
                         <h6 className="font-normal text-gray-900 text-sm mb-2">Combustível: {data?.fuel}</h6>
                         <h6 className="font-normal text-gray-900 text-sm mb-2">Capacidade do Combustível: {data?.fuel === 'Elétrico' ? 'Elétrico' : `${data?.fuel_capacity}L`}</h6>
                         <h6 className="font-normal text-gray-900 text-sm mb-2">Transmissão: {data?.transmission}</h6>
                     </div>
-                    <div>
+                    <div className="price-box">
                         <h5 className="font-bold">Preço do aluguel</h5>
                         <div className="flex mt-3 border p-4 border-gray-300 rounded-xl w-fit transition-all duration-500 group hover:bg-blue-400">
                             <div className="flex flex-col gap-2 pr-4 border-r border-gray-300">
@@ -77,31 +153,14 @@ export function CarContent({ data }:CarContentProps) {
                         </div>
                     </div>
                 </div>
+                <button onClick={() => setOpenRentalModal(true)} className={`${data?.availability === true ? 'opacity-50 cursor-none' : 'cursor-pointer'} reserve-btn bg-black text-white block mx-auto p-3 max-w-40 w-full font-semibold mt-12 rounded-lg transition-all duration-500 hover:bg-blue-500`}>{data?.availability === true ? 'Já reservado' : 'Reserve Agora'}</button>
             </div>
 
-            <button onClick={() => setOpenRentalModal(true)} className={`${data?.availability === true ? 'opacity-50 cursor-none' : 'cursor-pointer'} bg-black text-white block mx-auto p-3 max-w-40 w-full font-semibold mt-12 rounded-lg transition-all duration-500 hover:bg-blue-500`}>{data?.availability === true ? 'Já reservado' : 'Reserve Agora'}</button>
-            
-            <div className="container mt-20">
-                <h2 className="font-bold text-xl text-center">Avaliações de clientes</h2>
-                {data?.reviews.length === 0 ? <p className="text-center font-medium py-12 text-blue-300">O carro não possui avaliações 😔</p> :
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 place-items-center mt-10">
-                        {data?.reviews.map((review, index:number) => (
-                            <div key={index} className="bg-[#F3F5F7] p-3 rounded-xl max-w-md w-full flex flex-col gap-4">
-                                <FaQuoteLeft className="text-blue-500 text-xl" />
-                                <p className="font-medium text-sm">{review.comment}</p>
-                                <div className="flex items-center gap-3">
-                                    <Image className="w-10 h-10 rounded-full object-cover" src={review.avatarUrl || "/images/user.jpg"} width={200} height={200} alt="foto do usuário que avaliou o carro" />
-                                    <h6 className="font-semibold">{review.name}</h6>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                }
-            </div>
+            <Testimonials data={data} />
 
             <ReviewForm id={data?.id} />
             <Modal isOpenModal={openRentalModal} setIsOpenModal={setOpenRentalModal} maxWidth="max-w-md">
-                <h3 className="text-xl font-semibold text-center">Reserve o Carro Para Sua Viagem</h3>
+                <h3 className="text-lg font-semibold text-center">Reserve o Carro Para Sua Viagem</h3>
                 <form action={formAction} className="py-8">
                     <div className="flex justify-between flex-col lg:flex-row gap-5 lg:gap-0">
                         <div className="flex flex-col gap-3">

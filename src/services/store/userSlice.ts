@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { api } from '@/services/axios';
 import Cookies from 'js-cookie';
 
 export interface User {
@@ -38,7 +37,7 @@ export const fetchProfile = createAsyncThunk('user/fetchProfile', async (_, { re
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      cache: 'no-store',
+      next: { revalidate: 3 }
     });
 
     if (!res.ok) {

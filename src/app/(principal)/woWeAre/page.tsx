@@ -6,6 +6,7 @@ import { FaBullseye, FaHandshake } from "react-icons/fa6";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { Counter } from "@/components/principal/counter";
 
 export default function WoWeAre() {
 
@@ -55,14 +56,16 @@ export default function WoWeAre() {
                         <p className="wowedcp2 font-light text-gray-500">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         <div className="flex justify-between">
                             <span className="text-4xl font-bold flex gap-2 items-center">
-                                <span className="counter" data-value="3">0</span>
+                                {/* <span className="counter" data-value="3">0</span> */}
+                                <Counter start={0} end={3} />
                                 <span className="xpYears text-gray-500 text-sm font-normal">
                                     Anos de <br /> Experiência
                                 </span>
                             </span>
 
                             <span className="text-4xl font-bold flex gap-2 items-center">
-                                <span className="counter" data-value="600">0</span>
+                                {/* <span className="counter" data-value="600">0</span> */}
+                                <Counter start={0} end={600} />
                                 <span className="countClients text-gray-500 text-sm font-normal">
                                     Clientes <br /> Satisfeitos
                                 </span>
