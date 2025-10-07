@@ -23,7 +23,7 @@ export function Header() {
     const { "user-token": token } = parseCookies();
     const pathname = usePathname();
 
-    const isHome = pathname === "/";
+    const isHome = pathname === "https://drive-up-gamma.vercel.app";
 
     useGSAP(() => {
         const tl = gsap.timeline({defaults: { duration: 0.3, stagger:0.3, ease: "power2.inOut" }});
