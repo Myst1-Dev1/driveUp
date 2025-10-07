@@ -29,12 +29,12 @@ export function UserReserves({ cars, profile }:UserReservesProps) {
                                     <span className="font-light text-gray-500">{car.car_model}</span>
                                     
                                     {carRentals.length > 0 && (
-                                        <div key={carRentals[0].id}>
+                                        <div key={carRentals[0]?.id}>
                                             <div className="flex gap-5 w-full py-3">
                                                 <div className="flex flex-col gap-2">
                                                     <h6>Retirada</h6>
                                                     <h6>
-                                                        {new Date(carRentals[0].startDate).toLocaleDateString("pt-BR", {
+                                                        {new Date(carRentals[0]?.startDate).toLocaleDateString("pt-BR", {
                                                             day: "2-digit",
                                                             month: "2-digit",
                                                             year: "numeric",
@@ -44,7 +44,7 @@ export function UserReserves({ cars, profile }:UserReservesProps) {
                                                 <div className="flex flex-col gap-2">
                                                     <h6>Devolução</h6>
                                                     <h6>
-                                                        {new Date(carRentals[0].endDate).toLocaleDateString("pt-BR", {
+                                                        {new Date(carRentals[0]?.endDate).toLocaleDateString("pt-BR", {
                                                             day: "2-digit",
                                                             month: "2-digit",
                                                             year: "numeric",
@@ -56,11 +56,11 @@ export function UserReserves({ cars, profile }:UserReservesProps) {
                                                  {Intl.NumberFormat('pt-br', {
                                                     style: 'currency',
                                                     currency:'BRL'
-                                                }).format(carRentals[0].totalPrice)}
+                                                }).format(carRentals[0]?.totalPrice)}
                                             </span>
                                             <div className="flex gap-5 w-full mt-5">
-                                                <button onClick={() => returnRental(carRentals[0].id)} className="lg:max-w-28 w-full h-10 rounded-lg bg-black text-white flex items-center gap-3 p-2 cursor-pointer transition-all duration-500 hover:bg-blue-400">Devolver <FaUndo /></button>
-                                                <button onClick={() => cancelRental(carRentals[0].id)} className="lg:max-w-60 w-full h-10 rounded-lg bg-red-600 text-white flex items-center gap-3 p-2 cursor-pointer transition-all duration-500 hover:bg-blue-400">Cancelar <FaTimes /></button>
+                                                <button onClick={() => returnRental(carRentals[0]?.id)} className="lg:max-w-28 w-full h-10 rounded-lg bg-black text-white flex items-center gap-3 p-2 cursor-pointer transition-all duration-500 hover:bg-blue-400">Devolver <FaUndo /></button>
+                                                <button onClick={() => cancelRental(carRentals[0]?.id)} className="lg:max-w-60 w-full h-10 rounded-lg bg-red-600 text-white flex items-center gap-3 p-2 cursor-pointer transition-all duration-500 hover:bg-blue-400">Cancelar <FaTimes /></button>
                                             </div>
                                         </div>
                                     )}

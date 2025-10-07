@@ -1,4 +1,5 @@
-'use server';
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 
 import { ProfileContent } from "@/components/principal/profile";
 import { getCars } from "@/services/getCars";

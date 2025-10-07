@@ -37,7 +37,7 @@ export const fetchProfile = createAsyncThunk('user/fetchProfile', async (_, { re
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      next: { revalidate: 3 }
+      cache: 'no-store'
     });
 
     if (!res.ok) {

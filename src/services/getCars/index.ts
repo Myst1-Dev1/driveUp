@@ -2,7 +2,9 @@ export async function getCars() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}car/getCars`, {
       method: "GET",
-      cache: "no-store",
+      next: {
+        revalidate: 5
+      },
       headers: {
         "Content-Type": "application/json",
       },
